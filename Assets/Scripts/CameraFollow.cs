@@ -29,7 +29,6 @@ public class CameraFollow : MonoBehaviour
 		transform.position = new Vector3 (posX, posY, transform.position.z);
 
 		if(bound) {
-
 			//Mathf.Clamp(현재값, 최대값, 최소값);  현재값이 최대값까지만 반환해주고 최소값보다 작으면 그 최소값까지만 반환합니다.
 
 			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, minPos.x, maxPos.x),

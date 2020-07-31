@@ -160,12 +160,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144c192943966c942aaa4ac2bfa74545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoothTimeX: 0.1
-  smoothTimeY: 0.1
+  smoothTimeX: 0.4
+  smoothTimeY: 0.4
   velocity: {x: 0.5, y: 0.5}
   player: {fileID: 0}
-  minPos: {x: 0.5, y: 0}
-  maxPos: {x: 10, y: 5}
+  minPos: {x: 0, y: -10}
+  maxPos: {x: 30, y: 10}
   bound: 1
 --- !u!20 &519420031
 Camera:
