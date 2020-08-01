@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 5465208132254561222}
   - component: {fileID: 5465208132254561223}
   - component: {fileID: 5465208132254561220}
-  - component: {fileID: 26153476728016344}
-  - component: {fileID: 2081464988488122355}
+  - component: {fileID: 6308964040890931980}
   m_Layer: 0
   m_Name: Cell
-  m_TagString: Player
+  m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +43,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -165,7 +164,7 @@ MonoBehaviour:
   m_OptimizeGeometry: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
---- !u!60 &26153476728016344
+--- !u!60 &6308964040890931980
 PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,27 +195,5 @@ PolygonCollider2D:
       - {x: -0.25, y: -0.433}
       - {x: 0.25, y: -0.433}
       - {x: 0.5, y: 0}
-      - {x: 0.2995627, y: 0.34715745}
       - {x: 0.2638484, y: 0.40901455}
       - {x: 0.25, y: 0.433}
---- !u!50 &2081464988488122355
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5465208132254561221}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0

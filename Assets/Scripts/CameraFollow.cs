@@ -18,6 +18,7 @@ public class CameraFollow : MonoBehaviour
     }
 
     // Update is called once per frame
+    // FIXME: should use LateUpdate()
     void FixedUpdate()
     {
         // Mathf.SmoothDamp는 천천히 값을 증가시키는 메서드이다.
