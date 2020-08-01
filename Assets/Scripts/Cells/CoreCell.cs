@@ -38,7 +38,7 @@ public class CoreCell : Cell
     // -------------------------------------------------------------------------
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         FirePos = transform.Find("FrontPointer");
@@ -71,10 +71,10 @@ public class CoreCell : Cell
 
     // 물체를 회전시킨다
     private void Rotate() {
-        if (Input.GetKey(KeyCode.A)) {
+        if (Input.GetKey(KeyCode.Q)) {
             transform.Rotate(new Vector3(0, 0, 1) * (rotSpeed*100) * Time.deltaTime);
         }
-        if (Input.GetKey(KeyCode.D)) {
+        if (Input.GetKey(KeyCode.E)) {
             transform.Rotate(new Vector3(0, 0, -1) * (rotSpeed*100) * Time.deltaTime);
         }
     }
@@ -82,7 +82,7 @@ public class CoreCell : Cell
     // 플레이어의 입력으로부터 벡터값을 얻는다.
     // CoreCell의 로컬 좌표계에서 벡터 계산
     private Vector2 GetVector() {
-        Vector2 inputVector = new Vector2(0, Input.GetAxisRaw("Vertical"));
+        Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         inputVector = transform.localRotation * inputVector; // 로컬 좌표계 기준의 벡터
 
@@ -116,6 +116,10 @@ public class CoreCell : Cell
     {
         yield return new WaitForSeconds(coolTime);
         canAttack = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        
     }
 
 }
