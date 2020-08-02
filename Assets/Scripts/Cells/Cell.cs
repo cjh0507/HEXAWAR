@@ -26,6 +26,8 @@ public class Cell : MonoBehaviour
         // if(isAttached) Debug.Log("fuck yea!");
     }
 
+    /*
+
     public Vector2 getAbsPos() {
         return FindOrigin(gameObject, Vector2.zero);
     }
@@ -42,6 +44,8 @@ public class Cell : MonoBehaviour
         Debug.Log($"x : {obj.transform.localPosition.x}, y : {obj.transform.localPosition.y}");
         return FindOrigin(obj.transform.parent.gameObject, curPos + (Vector2) obj.transform.localPosition);
     }
+    
+    */
 
     // // Core cell로부터의 거리(Core의 coreDistance는 0이고 그 인접한 셀들의 coreDistance는 1인 식)
     // // Cell을 부착할 때 초기화해주어야 한다.

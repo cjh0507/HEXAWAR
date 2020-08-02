@@ -86,13 +86,10 @@ public class GluePoint : MonoBehaviour
             oCell.adjacentCells[oCellGPId] = aCell;
             oCell.isAttached = true;
 
-            localPos = (attachedCell.transform.localRotation) * localPos; 
-            otherCell.transform.position = aCell.getAbsPos() + localPos;
-            // otherCell.transform.position = (Vector2) attachedCell.transform.position + localPos; // ***************
-
-
-            otherCell.transform.rotation = coreCell.GetComponent<Transform>().rotation; // ******************
-            Debug.Log($"{oCell.name} Attached to {aCell.name} index {id} => pos: {otherCell.transform.position} rot: {otherCell.transform.rotation}"); // 나중에 지워야 됨
+            otherCell.transform.localPosition = localPos;
+            otherCell.transform.localRotation = Quaternion.identity;
+            
+            Debug.Log($"{oCell.name} Attached to {aCell.name} index {id} => pos: {otherCell.transform.localPosition} rot: {otherCell.transform.rotation}"); // 나중에 지워야 됨
         }
     }
 

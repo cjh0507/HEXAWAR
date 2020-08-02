@@ -1630,6 +1630,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 53762520557985932, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
+        type: 3}
+      propertyPath: isAttachable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1059770307867570940, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1689,6 +1694,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CoreCell
+      objectReference: {fileID: 0}
+    - target: {fileID: 1164689277293658330, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
+        type: 3}
+      propertyPath: isAttachable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2257528774526558748, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
+        type: 3}
+      propertyPath: isAttachable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659452769669539806, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
+        type: 3}
+      propertyPath: isAttachable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993739496372452860, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
+        type: 3}
+      propertyPath: isAttachable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9157684292532384560, guid: ab1ae2391b5cf1e4b9f44ae61d787fff,
+        type: 3}
+      propertyPath: isAttachable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab1ae2391b5cf1e4b9f44ae61d787fff, type: 3}
