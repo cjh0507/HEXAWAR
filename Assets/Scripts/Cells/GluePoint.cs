@@ -33,9 +33,9 @@ public class GluePoint : MonoBehaviour
             // 그 GluePoint  붙이기
             if (isAttachable) 
             {
+                isAttachable = false;
                 AttachCell(other);
                 OnAttach(other.GetComponent<GluePoint>().attachedCell, other);
-                isAttachable = false;
             }
         }
     }
@@ -45,41 +45,45 @@ public class GluePoint : MonoBehaviour
         {
             GameObject otherCell = other.GetComponent<GluePoint>().attachedCell; // 부딪힌 GluePoint를 갖고 있는 Cell 찾기
             // otherCell을 이 GluePoint의 attachedCell의 자식으로 넣고, 이 GluePoint가 대표하는 위치로 놓기
-            otherCell.transform.parent = attachedCell.transform; // 이거 맞아??? 
-            otherCell.transform.rotation = Quaternion.identity;
-            Vector2 localPos = Vector2.zero;
-            Quaternion localRot = Quaternion.identity;
+            otherCell.transform.parent = attachedCell.transform;
 
             Cell aCell = attachedCell.GetComponent<Cell>();
             Cell oCell =  otherCell.GetComponent<Cell>();
             int oCellGPId = other.GetComponent<GluePoint>().id;
             
             // 부딪힌 attached Cell의 GluePoint에 따라서 localPos 정한다
-            
-            localPos = localPosArr[this.id];
-            aCell.adjacentCells[this.id] = oCell;
-
-            oCell.adjacentCells[oCellGPId] = aCell;
-            oCell.isAttached = true;
+            Vector2 localPos = localPosArr[this.id];
+            // 충돌한 GluePoint 둘의 관계에 따라 localRotation을 설정한다
+            Quaternion localRot = Quaternion.Euler(new Vector3(0, 0, 60 * (oCellGPId-this.id+3)));
 
             otherCell.transform.localPosition = localPos;
-            otherCell.transform.localRotation = Quaternion.identity;
+            otherCell.transform.localRotation = localRot;
+
+            // 서로 부딪힌 Cell들의 adjacentCells 업데이트 - 아직 불완전함
+            aCell.adjacentCells[this.id] = oCell;
+            oCell.adjacentCells[oCellGPId] = aCell;
+
+            oCell.isAttached = true;
 
             Debug.Log($"{oCell.name} Attached to {aCell.name} index {id} => pos: {otherCell.transform.localPosition} rot: {otherCell.transform.rotation}"); // 나중에 지워야 됨
         }
     }
 
+    private void UpdateAdjacentCells(Cell cell) 
+    {   
+
+    }
+
     private void OnAttach(GameObject other_AttachedCell, Collider2D other) {
+
         Cell oCell = other_AttachedCell.GetComponent<Cell>();
         int otherGluePtID = other.GetComponent<GluePoint>().id;
         GameObject[] oGluePoints = oCell.gluePoints;
+
         oGluePoints[(otherGluePtID+2)%6].GetComponent<GluePoint>().isAttachable = true;
         oGluePoints[(otherGluePtID+3)%6].GetComponent<GluePoint>().isAttachable = true;
         oGluePoints[(otherGluePtID+4)%6].GetComponent<GluePoint>().isAttachable = true;
-        Debug.Log($"{otherGluePtID} collided");
-        Debug.Log($"Gluepoints {otherGluePtID+2}{otherGluePtID+3}{otherGluePtID+4} activated");
-        //foreach (GameObject gluePt in oGluePoinets) {
-        //    gluePt.GetComponent<GluePoint>().isAttachable = true;
-        //}
+
+        Debug.Log($"{otherGluePtID} collided"); // 나중에 지워야 됨
     }
 }
