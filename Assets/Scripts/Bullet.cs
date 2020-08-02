@@ -28,7 +28,6 @@ public class Bullet : MonoBehaviour
     // 총알이 어딘가에 닿았을 때 호출되는 함수
     void OnTriggerEnter2D(Collider2D other)
     {   
-        if(other.tag != "Player")
-            DestroyBullet();
+        
     }
 }

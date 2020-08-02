@@ -5,16 +5,21 @@ using UnityEngine;
 // 모든 Cell들이 공통적으로 가져야할 특성에 대해서 정의하는 부분
 public class Cell : MonoBehaviour
 {
+    // adjaCentCells 와 gluePoints의 index는 서로 대응된다(같은 index면 같은 위치)
     public Cell[] adjacentCells = new Cell[6];
-    public bool isAttached = false;
     public GameObject[] gluePoints = new GameObject[6];
+    public bool isAttached = false;
+    
+    private Vector2[] localPosArr = {
+        new Vector2(0, 0.866f), new Vector2(0.75f, 0.433f), new Vector2(0.75f, -0.433f), 
+        new Vector2(0, -0.866f), new Vector2(-0.75f, -0.433f), new Vector2(-0.75f, 0.433f) 
+    };
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
+    private PolygonCollider2D polygonCollider2D;
+
     void Start()
     {
+        polygonCollider2D = GetComponent<PolygonCollider2D>();
         for (int i = 0; i < gluePoints.Length; i++) 
         {
             gluePoints[i] = transform.GetChild(i+3).gameObject;
@@ -33,6 +38,74 @@ public class Cell : MonoBehaviour
                 return false;
         }
         return true;
+    }
+
+    // this Cell과 oCell간의 부착이 일어날 때
+    public void UpdateAdjacentCells() 
+    {   
+        // Raycast하기 전에 자기 자신 + GluePoints의 Collider를 꺼줘야 한다.
+        polygonCollider2D.enabled = false;
+        DisableGluePts();
+
+        SetGluePtsAttachable(); // GluePoints가 모두 attachable하게 만든다
+        // this Cell의 중심을 기준으로 6방향으로 RayCast를 해서 닿은 Cell이 있으면 서로의 adjacentCell에 추가한다.
+        RaycastHit2D[] hits = new RaycastHit2D[6];
+
+        for(int thisCellId = 0; thisCellId < hits.Length; thisCellId++) {
+            hits[thisCellId] = Physics2D.Linecast(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId])) );
+            Debug.DrawLine(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId])), Color.white, 2f); // 나중에 지우자
+
+            if (hits[thisCellId].collider != null) {
+                Debug.Log($"{hits[thisCellId].collider.name} hit"); // 나중에 지우자
+                GameObject hitGluePt = hits[thisCellId].collider.gameObject;
+                Cell hitCell = hitGluePt.transform.parent.GetComponent<Cell>();
+
+                adjacentCells[thisCellId] = hitCell;
+                hitCell.adjacentCells[hitGluePt.GetComponent<GluePoint>().id] = this;
+                
+                gluePoints[(thisCellId)% 6 ].GetComponent<GluePoint>().isAttachable = false;
+                gluePoints[(thisCellId+1)% 6 ].GetComponent<GluePoint>().isAttachable = false;
+                gluePoints[(thisCellId+5)% 6 ].GetComponent<GluePoint>().isAttachable = false;
+            }
+        }
+
+        // Raycast 끝났으니 Collider 킨다
+        EnableGluePts();
+        polygonCollider2D.enabled = true;
+    }
+
+    public int SearchCell(Cell targetCell) {
+        for (int i = 0; i < adjacentCells.Length; i++) {
+            if(adjacentCells[i] == targetCell)
+                return i;
+        }
+        return -1; // search failed
+    }
+
+    // adjacentCells에 따라 GluePoint 비활성화 
+    public void UpdateAttachability() {
+        if (this.gameObject.tag != "Player") {
+
+        }
+    }
+
+    void SetGluePtsAttachable() {
+        foreach(GameObject obj in gluePoints) {
+            obj.GetComponent<GluePoint>().isAttachable = true;
+        }
+    }
+
+    public void DisableGluePts() {
+        foreach (GameObject gluePt in gluePoints) {
+            gluePt.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+    public void EnableGluePts() {
+        foreach (GameObject gluePt in gluePoints) {
+            //if (gluePt.GetComponent<GluePoint>().isAttachable)
+                gluePt.GetComponent<BoxCollider2D>().enabled = true;
+        }
     }
 
     /*

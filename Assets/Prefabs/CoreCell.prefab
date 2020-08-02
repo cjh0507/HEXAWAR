@@ -249,7 +249,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  isAttached: 0
   gluePoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -257,6 +256,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isAttached: 0
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   FirePos: {fileID: 0}
   health: 10
@@ -363,7 +363,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -374,7 +374,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &9157684292532384560
 MonoBehaviour:
@@ -388,7 +388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd26c160c6a2e5946b6f04112048d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreCell: {fileID: 0}
   id: 2
   attachedCell: {fileID: 1059770307867570943}
   isAttachable: 1
@@ -531,7 +530,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -542,7 +541,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &5993739496372452860
 MonoBehaviour:
@@ -556,7 +555,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd26c160c6a2e5946b6f04112048d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreCell: {fileID: 0}
   id: 3
   attachedCell: {fileID: 1059770307867570943}
   isAttachable: 1
@@ -865,7 +863,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -876,7 +874,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &53762520557985932
 MonoBehaviour:
@@ -890,7 +888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd26c160c6a2e5946b6f04112048d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreCell: {fileID: 0}
   id: 5
   attachedCell: {fileID: 1059770307867570943}
   isAttachable: 1
@@ -990,7 +987,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -1001,7 +998,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &2659452769669539806
 MonoBehaviour:
@@ -1015,7 +1012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd26c160c6a2e5946b6f04112048d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreCell: {fileID: 0}
   id: 1
   attachedCell: {fileID: 1059770307867570943}
   isAttachable: 1
@@ -1120,7 +1116,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -1131,7 +1127,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &1164689277293658330
 MonoBehaviour:
@@ -1145,7 +1141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd26c160c6a2e5946b6f04112048d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreCell: {fileID: 0}
   id: 0
   attachedCell: {fileID: 1059770307867570943}
   isAttachable: 1
@@ -1245,7 +1240,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   m_SpriteTilingProperty:
     border: {x: 0.049999997, y: 0.049999997, z: 0.049999997, w: 0.049999997}
     pivot: {x: 0.5, y: 0.5}
@@ -1256,7 +1251,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.1}
+  m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &2257528774526558748
 MonoBehaviour:
@@ -1270,7 +1265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd26c160c6a2e5946b6f04112048d2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coreCell: {fileID: 0}
   id: 4
   attachedCell: {fileID: 1059770307867570943}
   isAttachable: 1
