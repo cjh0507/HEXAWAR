@@ -8,6 +8,8 @@ TagManager:
   - Bullet
   - PlayerCoreCell
   - GluePoint
+  - GunCell
+  - BoosterCell
   layers:
   - Default
   - TransparentFX
@@ -56,6 +58,9 @@ TagManager:
     locked: 0
   - name: Cells
     uniqueID: 2414270719
+    locked: 0
+  - name: Icon
+    uniqueID: 2680515973
     locked: 0
   - name: Bullet
     uniqueID: 2653462811

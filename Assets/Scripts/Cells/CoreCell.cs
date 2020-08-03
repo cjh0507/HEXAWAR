@@ -10,38 +10,32 @@ public class CoreCell : Cell
     private Rigidbody2D rigidBody;
 
     public GameObject bullet; // Instantiate될 총알
-    public Transform FirePos; // 총알이 나갈 위치(정면)
+    // public Transform FirePos; // 총알이 나갈 위치(정면)
 
     // coolTime 관리용
     private bool canAttack = true;
 
     // -----------------------------[PLAYER STATUS]-----------------------------
-    [SerializeField]
-    private float health; // Core의 체력
+    public float health = 100; // Core의 체력
     // [공격 관련 스탯]
-    [SerializeField]
-    private float damage; // Core의 공격의 damage
-    [SerializeField]
-    private float coolTime; // Core의 공격의 쿨타임
-    [SerializeField]
-    public float range; // 사정거리
-    [SerializeField]
-    public float shotSpeed; // 투사체 속도
+    public float damage = 5; // Core의 공격의 damage
+    public float coolTime = 0.5f; // Core의 공격의 쿨타임
+    public float range = 6; // 사정거리
+    public float shotSpeed = 5; // 투사체 속도
 
     // [이동 관련 스탯]
-    [SerializeField]
-    private float speed; // Core가 도달 가능한 "최대" 이동 속력
-    [SerializeField]
-    private float acceleration; // Core의 가속도 (얼마나 빠르게 최대 이동 속도에 도달하는가)
-    [SerializeField]
-    private float rotSpeed; // Core의 회전속도
+    public float speed = 10; // Core가 도달 가능한 "최대" 이동 속력
+    public float acceleration = 5; // Core의 가속도 (얼마나 빠르게 최대 이동 속도에 도달하는가)
+    public float rotSpeed = 1.5f; // Core의 회전속도
+    public float bulletSpread = 1; // 탄퍼짐 정도
     // -------------------------------------------------------------------------
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
+        EnableGluePts();
         rigidBody = GetComponent<Rigidbody2D>();
-        FirePos = transform.Find("FrontPointer");
+        // FirePos = transform.Find("FrontPointer");
     }
 
     void FixedUpdate()
@@ -72,10 +66,10 @@ public class CoreCell : Cell
     // 물체를 회전시킨다
     private void Rotate() {
         if (Input.GetKey(KeyCode.Q)) {
-            transform.Rotate(new Vector3(0, 0, 1) * (rotSpeed*100) * Time.deltaTime);
+            transform.Rotate(new Vector3(0, 0, 1) * (rotSpeed * 100 / rigidBody.mass) * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.E)) {
-            transform.Rotate(new Vector3(0, 0, -1) * (rotSpeed*100) * Time.deltaTime);
+            transform.Rotate(new Vector3(0, 0, -1) * (rotSpeed * 100 / rigidBody.mass) * Time.deltaTime);
         }
     }
 
@@ -93,15 +87,21 @@ public class CoreCell : Cell
     void FireAutomatically()
     {
         Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
-
+        dir = SetBulletSpread(dir);
+        
         MakeBullet(dir, transform.rotation);
         StartCoroutine(WaitForCoolTime());
           
     }
 
+    protected Vector2 SetBulletSpread(Vector2 dir) {
+        Quaternion randomRot = Quaternion.Euler(new Vector3(0, 0, Random.Range(-5f * bulletSpread, 5f * bulletSpread)));
+        return randomRot * dir;
+    }
+
     // 플레이어의 스테이터스에 맞추어 총알을 만든다
     void MakeBullet(Vector2 dir, Quaternion rotation) {
-        GameObject tempObj = Instantiate(bullet, FirePos.position, rotation);
+        GameObject tempObj = Instantiate(bullet, transform.position, rotation);
 
         Rigidbody2D tempRb = tempObj.GetComponent<Rigidbody2D>();
         tempRb.velocity = dir.normalized * shotSpeed; // 총알 속도 설정
@@ -118,6 +118,12 @@ public class CoreCell : Cell
         canAttack = true;
     }
 
+    public void IncreaseMass() {
+        rigidBody.mass += 0.2f;
+    }
+    public void DecreaseMass() {
+        rigidBody.mass -= 0.2f;
+    }
     private void OnCollisionEnter2D(Collision2D other) {
         
     }

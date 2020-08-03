@@ -19,12 +19,6 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    /// <summary>
-    /// Sent when another object enters a trigger collider attached to this
-    /// object (2D physics only).
-    /// </summary>
-    /// <param name="other">The other Collider2D involved in this collision.</param>
-
     // 총알이 어딘가에 닿았을 때 호출되는 함수
     void OnTriggerEnter2D(Collider2D other)
     {   

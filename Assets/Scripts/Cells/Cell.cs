@@ -8,8 +8,11 @@ public class Cell : MonoBehaviour
     // adjaCentCells 와 gluePoints의 index는 서로 대응된다(같은 index면 같은 위치)
     public Cell[] adjacentCells = new Cell[6];
     public GameObject[] gluePoints = new GameObject[6];
-    public bool isAttached = false;
-    
+
+    public float durability = 20;
+
+    public bool isAttached = false; // tissue에 소속되어 있는가?
+
     private Vector2[] localPosArr = {
         new Vector2(0, 0.866f), new Vector2(0.75f, 0.433f), new Vector2(0.75f, -0.433f), 
         new Vector2(0, -0.866f), new Vector2(-0.75f, -0.433f), new Vector2(-0.75f, 0.433f) 
@@ -17,16 +20,16 @@ public class Cell : MonoBehaviour
 
     private PolygonCollider2D polygonCollider2D;
 
-    void Start()
+    protected virtual void Awake()
     {
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         for (int i = 0; i < gluePoints.Length; i++) 
         {
-            gluePoints[i] = transform.GetChild(i+3).gameObject;
+            gluePoints[i] = transform.GetChild(i+2).gameObject;
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         // if(isAttached) Debug.Log("fuck yea!");
     }
@@ -41,7 +44,7 @@ public class Cell : MonoBehaviour
     }
 
     // this Cell과 oCell간의 부착이 일어날 때
-    public void UpdateAdjacentCells() 
+    public void UpdateAdjacentCellsOnAttach() 
     {   
         // Raycast하기 전에 자기 자신 + GluePoints의 Collider를 꺼줘야 한다.
         polygonCollider2D.enabled = false;
@@ -53,9 +56,9 @@ public class Cell : MonoBehaviour
 
         for(int thisCellId = 0; thisCellId < hits.Length; thisCellId++) {
             hits[thisCellId] = Physics2D.Linecast(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId])) );
-            Debug.DrawLine(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId])), Color.white, 2f); // 나중에 지우자
+            // Debug.DrawLine(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId])), Color.white, 2f); // 나중에 지우자
 
-            if (hits[thisCellId].collider != null) {
+            if (hits[thisCellId].collider != null && hits[thisCellId].collider.tag == "GluePoint") {
                 Debug.Log($"{hits[thisCellId].collider.name} hit"); // 나중에 지우자
                 GameObject hitGluePt = hits[thisCellId].collider.gameObject;
                 Cell hitCell = hitGluePt.transform.parent.GetComponent<Cell>();
@@ -63,12 +66,13 @@ public class Cell : MonoBehaviour
                 adjacentCells[thisCellId] = hitCell;
                 hitCell.adjacentCells[hitGluePt.GetComponent<GluePoint>().id] = this;
                 
-                gluePoints[(thisCellId)% 6 ].GetComponent<GluePoint>().isAttachable = false;
-                gluePoints[(thisCellId+1)% 6 ].GetComponent<GluePoint>().isAttachable = false;
-                gluePoints[(thisCellId+5)% 6 ].GetComponent<GluePoint>().isAttachable = false;
+                gluePoints[(thisCellId) % 6 ].GetComponent<GluePoint>().isAttachable = false;
+                gluePoints[(thisCellId+1) % 6 ].GetComponent<GluePoint>().isAttachable = false;
+                gluePoints[(thisCellId+5) % 6 ].GetComponent<GluePoint>().isAttachable = false;
+                // this.isAttached = true;
             }
         }
-
+        isAttached = true;
         // Raycast 끝났으니 Collider 킨다
         EnableGluePts();
         polygonCollider2D.enabled = true;
@@ -82,12 +86,14 @@ public class Cell : MonoBehaviour
         return -1; // search failed
     }
 
+    /*
     // adjacentCells에 따라 GluePoint 비활성화 
     public void UpdateAttachability() {
         if (this.gameObject.tag != "Player") {
 
         }
     }
+    */
 
     void SetGluePtsAttachable() {
         foreach(GameObject obj in gluePoints) {
@@ -103,7 +109,7 @@ public class Cell : MonoBehaviour
 
     public void EnableGluePts() {
         foreach (GameObject gluePt in gluePoints) {
-            //if (gluePt.GetComponent<GluePoint>().isAttachable)
+            // if (gluePt.GetComponent<GluePoint>().isAttachable)
                 gluePt.GetComponent<BoxCollider2D>().enabled = true;
         }
     }

@@ -35,7 +35,6 @@ public class GluePoint : MonoBehaviour
                 // StartCoroutine("DelayedEnableGluePts", other);
 
                 AttachCell(other);
-                // OnAttach(other.GetComponent<GluePoint>().attachedCell, other);
             }
 
         }
@@ -59,40 +58,27 @@ public class GluePoint : MonoBehaviour
 
             if(attachedCell == coreCell) {
                 otherCell.transform.localPosition = localPos;
-            }
-                
-            else 
-            {
+            } else {
                 otherCell.transform.localPosition = (Vector2) attachedCell.transform.localPosition + (Vector2) (attachedCell.transform.localRotation * localPos);
                 localRot = attachedCell.transform.localRotation * localRot;
             }
             otherCell.transform.localRotation = localRot;
 
-            // 서로 부딪힌 Cell들의 adjacentCells 업데이트 - 아직 불완전함
-            oCell.UpdateAdjacentCells();
-            // aCell.UpdateAdjacentCells(oCell, this.id);
-            // aCell.UpdateAttachability();
-            
-            // oCell.adjacentCells[oCellGPId] = aCell;
+            // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
+            oCell.UpdateAdjacentCellsOnAttach();
 
-            oCell.isAttached = true;
+            // 부딪힌 셀이 BoosterCell 종류였으면 코어 스테이터스 업데이트
+            if(otherCell.tag == "BoosterCell") {
+                BoosterCell boosterCell = otherCell.GetComponent<BoosterCell>();
+                boosterCell.FindCore();
+                boosterCell.UpgradeCoreStatus();
+            }
+            
+            // 코어의 질량 늘리기
+            coreCell.GetComponent<CoreCell>().IncreaseMass();
 
             Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
         }
-    }
-
-    private void OnAttach(GameObject other_AttachedCell, Collider2D other) {
-
-        Cell oCell = other_AttachedCell.GetComponent<Cell>();
-        int otherGluePtID = other.GetComponent<GluePoint>().id;
-        GameObject[] oGluePoints = oCell.gluePoints;
-
-        // 결합한 셀의 adjacentCells를 고려하지 않은 경우 
-        oGluePoints[(otherGluePtID+2)%6].GetComponent<GluePoint>().isAttachable = true;
-        oGluePoints[(otherGluePtID+3)%6].GetComponent<GluePoint>().isAttachable = true;
-        oGluePoints[(otherGluePtID+4)%6].GetComponent<GluePoint>().isAttachable = true;
-
-        Debug.Log($"otherGluePtId : {otherGluePtID} collided"); // 나중에 지워야 됨
     }
 
     IEnumerator DelayedEnableGluePts(Collider2D other) {
@@ -100,7 +86,7 @@ public class GluePoint : MonoBehaviour
         attachedCell.GetComponent<Cell>().EnableGluePts();
         // gameObject.GetComponent<BoxCollider2D>().enabled = false;
         other.GetComponent<GluePoint>().attachedCell.GetComponent<Cell>().EnableGluePts();
-        other.GetComponent<BoxCollider2D>().enabled = false;
+        // other.GetComponent<BoxCollider2D>().enabled = false;
         yield return null;
     }
 }
