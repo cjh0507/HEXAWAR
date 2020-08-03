@@ -11,6 +11,8 @@ public class Cell : MonoBehaviour
 
     protected CoreCell coreCell;
 
+    public string cellType;
+
     public float durability = 50;
 
     public bool isAttached = false; // tissue에 소속되어 있는가?
@@ -46,7 +48,9 @@ public class Cell : MonoBehaviour
     }
 
     // this Cell과 oCell간의 부착이 일어날 때
-    public void UpdateAdjacentCellsOnAttach() 
+    // 1. adjacentCells 업데이트 하기
+    // 2. FeatureCells 체크
+    public void OnAttach() 
     {   
         // Raycast하기 전에 자기 자신 + GluePoints의 Collider를 꺼줘야 한다.
         polygonCollider2D.enabled = false;
@@ -63,15 +67,23 @@ public class Cell : MonoBehaviour
             if (hits[thisCellId].collider != null && hits[thisCellId].collider.tag == "GluePoint") {
                 Debug.Log($"{hits[thisCellId].collider.name} hit"); // 나중에 지우자
                 GameObject hitGluePt = hits[thisCellId].collider.gameObject;
+                int hitGluePtId = hitGluePt.GetComponent<GluePoint>().id;
                 Cell hitCell = hitGluePt.transform.parent.GetComponent<Cell>();
 
+                // this Cell의 adjacentCells에 hitCell 추가
                 adjacentCells[thisCellId] = hitCell;
-                hitCell.adjacentCells[hitGluePt.GetComponent<GluePoint>().id] = this;
+                // hitCell의 adjacentCells에 this Cell 추가
+                hitCell.adjacentCells[hitGluePtId] = this;
                 
                 gluePoints[(thisCellId) % 6 ].GetComponent<GluePoint>().isAttachable = false;
                 gluePoints[(thisCellId+1) % 6 ].GetComponent<GluePoint>().isAttachable = false;
                 gluePoints[(thisCellId+5) % 6 ].GetComponent<GluePoint>().isAttachable = false;
-                // this.isAttached = true;
+
+                // hitCell이 FeatureCell이었다면
+                if(hitCell.cellType == "FeatureCell") {
+                    // this Cell에게 Feature 적용
+                    ((FeatureCell) hitCell).GiveFeature(hitGluePtId);
+                }
             }
         }
         isAttached = true;

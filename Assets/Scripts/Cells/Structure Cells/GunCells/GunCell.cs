@@ -23,6 +23,7 @@ public class GunCell : Cell
     // Start is called before the first frame update
     protected override void Awake()
     {
+        cellType = "GunCell";
         base.Awake();
     }
 

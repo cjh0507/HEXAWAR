@@ -65,15 +65,16 @@ public class GluePoint : MonoBehaviour
             otherCell.transform.localRotation = localRot;
 
             // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
-            oCell.UpdateAdjacentCellsOnAttach();
+            oCell.OnAttach();
             oCell.FindCore();
             // 부딪힌 셀이 BoosterCell 종류였으면 코어 스테이터스 업데이트
-            if(otherCell.tag == "BoosterCell") {
-                BoosterCell boosterCell = otherCell.GetComponent<BoosterCell>();
-                boosterCell.UpgradeCoreStatus();
+            if(oCell.cellType == "BoosterCell") {
+                ((BoosterCell) oCell).UpgradeCoreStatus();
             }
-
-            
+            // 부딪힌 셀이 FeatureCell 종류였으면
+            if(oCell.cellType == "FeatureCell") {
+                ((FeatureCell) oCell).GiveFeature();
+            }
             
             // 코어의 질량 늘리기
             coreCell.GetComponent<CoreCell>().IncreaseMass();

@@ -33,6 +33,7 @@ public class CoreCell : Cell
     // Start is called before the first frame update
     void Start()
     {
+        cellType = "CoreCell";
         EnableGluePts();
         rigidBody = GetComponent<Rigidbody2D>();
         // FirePos = transform.Find("FrontPointer");

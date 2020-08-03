@@ -6,4 +6,6 @@ public abstract class BoosterCell : Cell
 {
     public abstract void UpgradeCoreStatus();
 
+    public abstract void CanCelEffects();
+
 }
