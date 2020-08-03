@@ -66,13 +66,14 @@ public class GluePoint : MonoBehaviour
 
             // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
             oCell.UpdateAdjacentCellsOnAttach();
-
+            oCell.FindCore();
             // 부딪힌 셀이 BoosterCell 종류였으면 코어 스테이터스 업데이트
             if(otherCell.tag == "BoosterCell") {
                 BoosterCell boosterCell = otherCell.GetComponent<BoosterCell>();
-                boosterCell.FindCore();
                 boosterCell.UpgradeCoreStatus();
             }
+
+            
             
             // 코어의 질량 늘리기
             coreCell.GetComponent<CoreCell>().IncreaseMass();

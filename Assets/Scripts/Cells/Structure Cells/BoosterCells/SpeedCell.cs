@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SpeedCell : BoosterCell
 {
+    public float speedDelta = 1f;
+    public float accelDelta = 2.5f;
     public override void UpgradeCoreStatus() {
-        SetQuantity(2f);
-        coreCell.speed += quantity;
+        coreCell.speed += speedDelta;
+        coreCell.acceleration += accelDelta;
     }
 }

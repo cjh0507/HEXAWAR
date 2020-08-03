@@ -36,12 +36,12 @@ public class GunCell : Cell
         }
     }
 
-
     // vitual => GunCell을 상속받는 Cell들이 오버라이드 가능
     // (마우스 커서 방향으로) 총알을 발사한다
     protected virtual void FireAutomatically()
     {
-        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
+        Vector2 dir = GetNormalVector();
+        // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
         dir = SetBulletSpread(dir);
         MakeBullet(dir);
         StartCoroutine(WaitForCoolTime());
@@ -59,7 +59,7 @@ public class GunCell : Cell
         GameObject tempObj = Instantiate(bullet, transform.position, transform.rotation);
 
         Rigidbody2D tempRb = tempObj.GetComponent<Rigidbody2D>();
-        tempRb.velocity = dir.normalized * shotSpeed; // 총알 속도 설정
+        tempRb.velocity = coreCell.rigidBody.velocity + dir.normalized * shotSpeed; // 총알 속도 설정
 
         Bullet tempBullet = tempObj.GetComponent<Bullet>();
         tempBullet.damage = this.damage; // 총알의 데미지 설정

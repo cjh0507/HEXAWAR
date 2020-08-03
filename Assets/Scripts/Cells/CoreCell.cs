@@ -7,7 +7,7 @@ using UnityEngine;
 // CoreCell은 FeatureCell의 기능 또한 갖고 있으며(CoreCell에 붙은 Cell들은 강화됨), StructureCell의 기능도 함(이동 및 공격)
 public class CoreCell : Cell
 {
-    private Rigidbody2D rigidBody;
+    public Rigidbody2D rigidBody;
 
     public GameObject bullet; // Instantiate될 총알
     // public Transform FirePos; // 총알이 나갈 위치(정면)
@@ -86,12 +86,12 @@ public class CoreCell : Cell
     // (마우스 커서 방향으로) 총알을 발사한다
     void FireAutomatically()
     {
-        Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
+        Vector2 dir = GetNormalVector();
+        // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
         dir = SetBulletSpread(dir);
         
-        MakeBullet(dir, transform.rotation);
+        MakeBullet(dir);
         StartCoroutine(WaitForCoolTime());
-          
     }
 
     protected Vector2 SetBulletSpread(Vector2 dir) {
@@ -100,11 +100,11 @@ public class CoreCell : Cell
     }
 
     // 플레이어의 스테이터스에 맞추어 총알을 만든다
-    void MakeBullet(Vector2 dir, Quaternion rotation) {
-        GameObject tempObj = Instantiate(bullet, transform.position, rotation);
+    void MakeBullet(Vector2 dir) {
+        GameObject tempObj = Instantiate(bullet, transform.position, transform.rotation);
 
         Rigidbody2D tempRb = tempObj.GetComponent<Rigidbody2D>();
-        tempRb.velocity = dir.normalized * shotSpeed; // 총알 속도 설정
+        tempRb.velocity = rigidBody.velocity + dir.normalized * shotSpeed; // 총알 속도 설정
 
         Bullet tempBullet = tempObj.GetComponent<Bullet>();
         tempBullet.damage = this.damage; // 총알의 데미지 설정

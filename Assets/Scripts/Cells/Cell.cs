@@ -9,7 +9,9 @@ public class Cell : MonoBehaviour
     public Cell[] adjacentCells = new Cell[6];
     public GameObject[] gluePoints = new GameObject[6];
 
-    public float durability = 20;
+    protected CoreCell coreCell;
+
+    public float durability = 50;
 
     public bool isAttached = false; // tissue에 소속되어 있는가?
 
@@ -86,14 +88,9 @@ public class Cell : MonoBehaviour
         return -1; // search failed
     }
 
-    /*
-    // adjacentCells에 따라 GluePoint 비활성화 
-    public void UpdateAttachability() {
-        if (this.gameObject.tag != "Player") {
-
-        }
+    protected Vector2 GetNormalVector() {
+        return transform.rotation * Vector2.up;
     }
-    */
 
     void SetGluePtsAttachable() {
         foreach(GameObject obj in gluePoints) {
@@ -114,26 +111,10 @@ public class Cell : MonoBehaviour
         }
     }
 
-    /*
-
-    public Vector2 getAbsPos() {
-        return FindOrigin(gameObject, Vector2.zero);
+    public void FindCore() {
+        if(isAttached)
+            coreCell = transform.parent.gameObject.GetComponent<CoreCell>();
     }
-
-    // Core에 붙어 있지 않은 경우에 쓰면 안됨
-    public Vector2 FindOrigin(GameObject obj, Vector2 curPos) {
-        if (obj.tag == "Player") {
-            Debug.Log("im parent");
-            Debug.Log($"x : {obj.transform.position.x}, y : {obj.transform.position.y}");
-            return curPos + (Vector2) obj.transform.position;
-        }
-
-        Debug.Log("finding parent");
-        Debug.Log($"x : {obj.transform.localPosition.x}, y : {obj.transform.localPosition.y}");
-        return FindOrigin(obj.transform.parent.gameObject, curPos + (Vector2) obj.transform.localPosition);
-    }
-
-    */
 
     // // Core cell로부터의 거리(Core의 coreDistance는 0이고 그 인접한 셀들의 coreDistance는 1인 식)
     // // Cell을 부착할 때 초기화해주어야 한다.
