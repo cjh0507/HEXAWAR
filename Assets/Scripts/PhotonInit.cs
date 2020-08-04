@@ -5,9 +5,10 @@ using Photon;
 
 public class PhotonInit : Photon.PunBehaviour {
 
+    private int st = 0;
     void Awake()
     {
-        PhotonNetwork.ConnectUsingSettings("MyFPS 1.0");
+        PhotonNetwork.ConnectUsingSettings("hexawar");
     }
 
     public override void OnJoinedLobby()
@@ -36,10 +37,11 @@ public class PhotonInit : Photon.PunBehaviour {
 
     IEnumerator CreatePlayer()
     {
-        PhotonNetwork.Instantiate("Player",
-                                    new Vector3(0, 1, 0),
+        PhotonNetwork.Instantiate("CoreCell",
+                                    new Vector3(0, 0, 0),
                                     Quaternion.identity,
                                     0);
+        st += 1;
         yield return null;
     }
 

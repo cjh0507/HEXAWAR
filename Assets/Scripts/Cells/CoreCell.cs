@@ -1,16 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Utility;
 
 // CoreCell의 기능을 정의하는 부분
 // CoreCell은 Player의 "체력", "이동", "시점"의 중심
 // CoreCell은 FeatureCell의 기능 또한 갖고 있으며(CoreCell에 붙은 Cell들은 강화됨), StructureCell의 기능도 함(이동 및 공격)
-public class CoreCell : Cell
+public class CoreCell : MonoBehaviour
 {
+    public Cell[] adjacentCells = new Cell[6];
+    public bool isAttached = false;
+    public GameObject[] gluePoints = new GameObject[6];
+
     private Rigidbody2D rigidBody;
 
     public GameObject bullet; // Instantiate될 총알
     public Transform FirePos; // 총알이 나갈 위치(정면)
+
+    private Transform tr;
+    private PhotonView pv;
+
+    private Vector3 currPos;
+    private Quaternion currRot; 
 
     // coolTime 관리용
     private bool canAttack = true;
@@ -38,36 +49,76 @@ public class CoreCell : Cell
     // -------------------------------------------------------------------------
 
     // Start is called before the first frame update
-    void Awake()
+    // void Awake()
+    // {
+    //     rigidBody = GetComponent<Rigidbody2D>();
+    //     for (int i = 0; i < gluePoints.Length; i++) 
+    //     {
+    //         gluePoints[i] = transform.GetChild(i+3).gameObject;
+    //     }
+    //     FirePos = transform.Find("FrontPointer");
+    // }
+
+    void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        for (int i = 0; i < gluePoints.Length; i++) 
+        {
+            gluePoints[i] = transform.GetChild(i+3).gameObject;
+        }
         FirePos = transform.Find("FrontPointer");
-    }
+        
+        tr = GetComponent<Transform>();
+        pv = GetComponent<PhotonView>();
 
-    void FixedUpdate()
-    {
-        // 이동에 관한 입력에 반응해야 함
-        SetVelocity();
-        Rotate();
-        // 공격은 입력없이 지속적으로 발사됨
-        if(canAttack) {
-            canAttack = false;
-            FireAutomatically();
+        pv.ObservedComponents[0] = this;
+
+        if (pv.isMine)
+        {
+            Camera.main.GetComponent<SmoothFollow>().target = tr;
         }
     }
 
-    // 물체의 속도를 지정한다
-    private void SetVelocity()
+    void Update()
     {
-        Vector2 vector = GetVector(); // 플레이어 입력으로부터 벡터값을 받는다.
-
-        if (Mathf.Abs(rigidBody.velocity.magnitude) < speed)
-        {   
-            // 최대 속력에 도달하지 못했으면 가속한다
-            rigidBody.AddForce(vector * acceleration);
-        } 
+        if (pv.isMine)
+        {
+            // 이동에 관한 입력에 반응해야 함
+            //SetVelocity();
+            Move();
+            Rotate();
+        }
+        else
+        {
+            tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
+            tr.rotation = Quaternion.Lerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
+        }
+        // 공격은 입력없이 지속적으로 발사됨
+        // if(canAttack) {
+        //     canAttack = false;
+        //     FireAutomatically();
+        // }
     }
 
+    // 물체의 속도를 지정한다
+    // private void SetVelocity()
+    // {
+    //     Vector2 vector = GetVector(); // 플레이어 입력으로부터 벡터값을 받는다.
+
+    //     if (Mathf.Abs(rigidBody.velocity.magnitude) < speed)
+    //     {   
+    //         // 최대 속력에 도달하지 못했으면 가속한다
+    //         rigidBody.AddForce(vector * acceleration);
+    //     } 
+    // }
+
+    private void Move() {
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+
+        tr.Translate(new Vector2(0, 1) * v * Time.deltaTime * speed 
+                    + new Vector2(1, 0) * h * Time.deltaTime * speed);
+    }
 
     // 물체를 회전시킨다
     private void Rotate() {
@@ -81,13 +132,13 @@ public class CoreCell : Cell
 
     // 플레이어의 입력으로부터 벡터값을 얻는다.
     // CoreCell의 로컬 좌표계에서 벡터 계산
-    private Vector2 GetVector() {
-        Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    // private Vector2 GetVector() {
+    //     Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        inputVector = transform.localRotation * inputVector; // 로컬 좌표계 기준의 벡터
+    //     inputVector = transform.localRotation * inputVector; // 로컬 좌표계 기준의 벡터
 
-        return inputVector.normalized;
-    }
+    //     return inputVector.normalized;
+    // }
 
     // (마우스 커서 방향으로) 총알을 발사한다
     void FireAutomatically()
@@ -122,4 +173,18 @@ public class CoreCell : Cell
         
     }
 
+    // 동기화 콜백함수
+    void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            stream.SendNext(tr.position);
+            stream.SendNext(tr.rotation);
+        }
+        else
+        {
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
+        }
+    }
 }
