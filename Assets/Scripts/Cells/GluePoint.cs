@@ -53,6 +53,8 @@ public class GluePoint : MonoBehaviour
 
             Cell aCell = attachedCell.GetComponent<Cell>();
             Cell oCell =  otherCell.GetComponent<Cell>();
+            if(oCell.cellType == "CoreCell")
+                return;
             oCell.isAttached = true;
             
             int oCellGPId = other.GetComponent<GluePoint>().id;
