@@ -49,13 +49,21 @@ public class CoreCell : Cell
 
     void FixedUpdate()
     {
-        // 이동에 관한 입력에 반응해야 함
-        SetVelocity();
-        Rotate();
-        // 공격은 입력없이 지속적으로 발사됨
-        if(canAttack) {
-            canAttack = false;
-            FireAutomatically();
+        if (pv.isMine)
+        {
+            // 이동에 관한 입력에 반응해야 함
+            SetVelocity();
+            Rotate();
+            // 공격은 입력없이 지속적으로 발사됨
+            if(canAttack) {
+                canAttack = false;
+                FireAutomatically();
+            }
+        }
+        else
+        {
+            tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
+            tr.rotation = Quaternion.Lerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
         }
     }
 
@@ -152,4 +160,27 @@ public class CoreCell : Cell
         
     }
 
+    public void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            Vector3 pos = transform.localPosition;
+            stream.Serialize(ref pos);
+        }
+        else
+        {
+            Vector3 pos = Vector3.zero;
+            stream.Serialize(ref pos);
+        }
+        // if (stream.isWriting)
+        // {
+        //     stream.SendNext(tr.position);
+        //     stream.SendNext(tr.rotation);
+        // }
+        // else
+        // {
+        //     currPos = (Vector3)stream.ReceiveNext();
+        //     currRot = (Quaternion)stream.ReceiveNext();
+        // }
+    }
 }

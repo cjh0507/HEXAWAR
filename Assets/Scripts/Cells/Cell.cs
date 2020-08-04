@@ -5,6 +5,14 @@ using UnityEngine;
 // 모든 Cell들이 공통적으로 가져야할 특성에 대해서 정의하는 부분
 public class Cell : MonoBehaviour
 {
+    // -----------------------------[NETWORK VARS]------------------------------
+    public Transform tr;
+    public PhotonView pv;
+
+    public Vector3 currPos;
+    public Quaternion currRot;
+    
+
     // adjaCentCells 와 gluePoints의 index는 서로 대응된다(같은 index면 같은 위치)
     public Cell[] adjacentCells = new Cell[6];
     public GameObject[] gluePoints = new GameObject[6];
@@ -41,6 +49,14 @@ public class Cell : MonoBehaviour
         {
             gluePoints[i] = transform.GetChild(i+1).gameObject;
         }
+    }
+
+    void Start()
+    {
+        tr = GetComponent<Transform>();
+        pv = GetComponent<PhotonView>();
+
+        pv.ObservedComponents[0] = this;
     }
 
     // adjacentCell가 비어있는지 체크
