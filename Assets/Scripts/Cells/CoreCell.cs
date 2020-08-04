@@ -32,6 +32,8 @@ public class CoreCell : Cell
 
     protected override void Awake() {
         mass = 1.0f;
+        maxDurability = 100;
+        durability = 100;
         cellType = "CoreCell";
         base.Awake();
     }

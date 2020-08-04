@@ -16,6 +16,7 @@ public class Cell : MonoBehaviour
 
     public string cellType;
 
+    public float maxDurability = 50;
     public float durability = 50;
 
     public float mass = 0.20f;
@@ -33,16 +34,12 @@ public class Cell : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.mass = this.mass;
+        durability = maxDurability;
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         for (int i = 0; i < gluePoints.Length; i++) 
         {
             gluePoints[i] = transform.GetChild(i+1).gameObject;
         }
-    }
-
-    protected virtual void Update()
-    {
-        // if(isAttached) Debug.Log("fuck yea!");
     }
 
     // adjacentCell가 비어있는지 체크
