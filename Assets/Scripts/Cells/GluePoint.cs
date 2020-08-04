@@ -6,6 +6,8 @@ public class GluePoint : MonoBehaviour
 {
     public int id; // 0 ~ 5번 중 어느 위치의 gluePoint?
     public GameObject attachedCell; // 이 gluePoint가 부착된 Cell
+
+    [SerializeField]
     private GameObject coreCell; // 중심 셀
 
     public bool isAttachable = false;
@@ -19,7 +21,6 @@ public class GluePoint : MonoBehaviour
     void Start()
     {
         attachedCell = transform.parent.gameObject;
-        coreCell = GameObject.FindWithTag("Player");
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -48,6 +49,8 @@ public class GluePoint : MonoBehaviour
         if (true)
         {
             GameObject otherCell = other.GetComponent<GluePoint>().attachedCell; // 부딪힌 GluePoint를 갖고 있는 Cell 찾기
+            if(coreCell == null)
+                coreCell = attachedCell.GetComponent<Cell>().GetCoreCell().gameObject;
             // otherCell을 CoreCell의 자식으로 넣고, 이 GluePoint가 대표하는 위치로 놓기
             otherCell.transform.parent = coreCell.transform;
 
@@ -64,7 +67,7 @@ public class GluePoint : MonoBehaviour
             // 충돌한 GluePoint 둘의 관계에 따라 localRotation을 설정한다
             Quaternion localRot = Quaternion.Euler(new Vector3(0, 0, 60 * (oCellGPId-this.id+3)));
 
-            if(attachedCell == coreCell) {
+            if(attachedCell.GetComponent<Cell>().cellType == "CoreCell") {
                 otherCell.transform.localPosition = localPos;
             } else {
                 otherCell.transform.localPosition = (Vector2) attachedCell.transform.localPosition + (Vector2) (attachedCell.transform.localRotation * localPos);
@@ -86,6 +89,8 @@ public class GluePoint : MonoBehaviour
             if(oCell.cellType == "FeatureCell") {
                 ((FeatureCell) oCell).GiveFeature();
             }
+
+            otherCell.layer = attachedCell.layer; // 붙은 셀의 소유주 정하기
 
             Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
         }

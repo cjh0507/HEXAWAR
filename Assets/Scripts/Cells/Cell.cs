@@ -138,6 +138,10 @@ public class Cell : MonoBehaviour
             coreCell = transform.parent.gameObject.GetComponent<CoreCell>();
     }
 
+    public CoreCell GetCoreCell() {
+        return coreCell;
+    }
+
     // // Core cell로부터의 거리(Core의 coreDistance는 0이고 그 인접한 셀들의 coreDistance는 1인 식)
     // // Cell을 부착할 때 초기화해주어야 한다.
     // private int coreDistance;

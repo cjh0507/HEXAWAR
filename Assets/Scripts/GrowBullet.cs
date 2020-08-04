@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// 활성화시에 시간이 지남에 따라(정확히는 사거리 끝에 갈수록) 점점 커지고 데미지가 세지는 총알이 된다.
 public class GrowBullet : MonoBehaviour
 {
     Bullet bullet;

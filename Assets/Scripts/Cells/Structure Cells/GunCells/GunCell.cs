@@ -12,7 +12,9 @@ public class GunCell : Cell
     private bool canAttack = true;
 
     // -----------------------------[FEATURE CHECK]-----------------------------
+    [HideInInspector]
     public int haveGrow = 0;
+    [HideInInspector]
     public int haveMagic = 0;
     // -----------------------------[GUNCELL STATUS]-----------------------------
     // [공격 관련 스탯]
@@ -59,8 +61,10 @@ public class GunCell : Cell
     // vitual => GunCell을 상속받는 Cell들이 오버라이드 가능
     // 플레이어의 스테이터스에 맞추어 총알을 만든다
     // 생성 과정에서 dir은 normalized 된다
-    protected virtual void MakeBullet(Vector2 dir) {
+    protected void MakeBullet(Vector2 dir) {
         GameObject tempObj = Instantiate(bullet, transform.position, transform.rotation);
+
+        tempObj.layer = gameObject.layer; // 총알의 소유주 정하기
 
         Rigidbody2D tempRb = tempObj.GetComponent<Rigidbody2D>();
         tempRb.velocity = coreCell.rigidBody.velocity + dir.normalized * shotSpeed; // 총알 속도 설정

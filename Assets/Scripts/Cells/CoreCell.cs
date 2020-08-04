@@ -13,7 +13,9 @@ public class CoreCell : Cell
     private bool canAttack = true;
 
     // -----------------------------[FEATURE CHECK]-----------------------------
+    [HideInInspector]
     public int haveGrow = 0;
+    [HideInInspector]
     public int haveMagic = 0;
 
     // -----------------------------[PLAYER STATUS]-----------------------------
@@ -35,6 +37,7 @@ public class CoreCell : Cell
         maxDurability = 100;
         durability = 100;
         cellType = "CoreCell";
+        coreCell = this;
         base.Awake();
     }
 
@@ -108,6 +111,8 @@ public class CoreCell : Cell
     // 플레이어의 스테이터스에 맞추어 총알을 만든다
     void MakeBullet(Vector2 dir) {
         GameObject tempObj = Instantiate(bullet, transform.position, transform.rotation);
+
+        tempObj.layer = gameObject.layer; // 총알의 소유주 정하기
 
         Rigidbody2D tempRb = tempObj.GetComponent<Rigidbody2D>();
         tempRb.velocity = rigidBody.velocity + dir.normalized * shotSpeed; // 총알 속도 설정
