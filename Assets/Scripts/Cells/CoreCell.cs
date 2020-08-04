@@ -7,16 +7,16 @@ using UnityEngine;
 // CoreCell은 FeatureCell의 기능 또한 갖고 있으며(CoreCell에 붙은 Cell들은 강화됨), StructureCell의 기능도 함(이동 및 공격)
 public class CoreCell : Cell
 {
-    public Rigidbody2D rigidBody;
-
     public GameObject bullet; // Instantiate될 총알
-    // public Transform FirePos; // 총알이 나갈 위치(정면)
 
     // coolTime 관리용
     private bool canAttack = true;
 
+    // -----------------------------[FEATURE CHECK]-----------------------------
+    public int haveGrow = 0;
+    public int haveMagic = 0;
+
     // -----------------------------[PLAYER STATUS]-----------------------------
-    public float health = 100; // Core의 체력
     // [공격 관련 스탯]
     public float damage = 5; // Core의 공격의 damage
     public float coolTime = 0.5f; // Core의 공격의 쿨타임
@@ -42,8 +42,6 @@ public class CoreCell : Cell
     void Start()
     {
         EnableGluePts();
-        rigidBody = GetComponent<Rigidbody2D>();
-        // FirePos = transform.Find("FrontPointer");
     }
 
     void FixedUpdate()
@@ -115,6 +113,19 @@ public class CoreCell : Cell
         tempRb.velocity = rigidBody.velocity + dir.normalized * shotSpeed; // 총알 속도 설정
 
         Bullet tempBullet = tempObj.GetComponent<Bullet>();
+
+        // Feature 활성화
+        if (haveGrow != 0) {
+            GrowBullet growBullet = tempBullet.GetComponent<GrowBullet>();
+            growBullet.enabled = true;
+            growBullet.growRate += (haveGrow - 1) * 0.5f;
+        }
+            
+        if (haveMagic != 0) {
+            tempBullet.GetComponent<MagicBullet>().enabled = true;
+        }
+            
+
         tempBullet.damage = this.damage; // 총알의 데미지 설정
         tempBullet.popTime = range / shotSpeed; // 총알의 사정거리 설정
     }

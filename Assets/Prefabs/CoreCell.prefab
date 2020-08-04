@@ -284,7 +284,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -746,7 +746,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.1
+      value: 0.5
       mode: 0
       spread: 0
       speed:
@@ -865,7 +865,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 10
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -918,7 +918,7 @@ ParticleSystem:
     rateOverDistance:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 5
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5020,13 +5020,15 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  coreCell: {fileID: 0}
-  cellType: 
-  durability: 20
-  isAttached: 0
   rigidBody: {fileID: 0}
+  cellType: 
+  maxDurability: 50
+  durability: 20
+  mass: 0.2
+  isAttached: 0
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
-  health: 10
+  haveGrow: 0
+  haveMagic: 0
   damage: 5
   coolTime: 0.5
   range: 6

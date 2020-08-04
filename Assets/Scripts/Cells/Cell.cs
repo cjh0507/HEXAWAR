@@ -9,9 +9,10 @@ public class Cell : MonoBehaviour
     public Cell[] adjacentCells = new Cell[6];
     public GameObject[] gluePoints = new GameObject[6];
 
-    Rigidbody2D rigidBody;
+    [HideInInspector]
+    public Rigidbody2D rigidBody;
 
-    [SerializeField]
+    // [SerializeField]
     protected CoreCell coreCell;
 
     public string cellType;

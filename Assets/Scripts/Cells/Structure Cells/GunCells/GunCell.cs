@@ -11,6 +11,9 @@ public class GunCell : Cell
     // coolTime 관리용
     private bool canAttack = true;
 
+    // -----------------------------[FEATURE CHECK]-----------------------------
+    public int haveGrow = 0;
+    public int haveMagic = 0;
     // -----------------------------[GUNCELL STATUS]-----------------------------
     // [공격 관련 스탯]
     public float damage = 2.5f; // Core의 공격의 damage
@@ -63,6 +66,18 @@ public class GunCell : Cell
         tempRb.velocity = coreCell.rigidBody.velocity + dir.normalized * shotSpeed; // 총알 속도 설정
 
         Bullet tempBullet = tempObj.GetComponent<Bullet>();
+
+        // Feature 활성화
+        if (haveGrow != 0) {
+            GrowBullet growBullet = tempBullet.GetComponent<GrowBullet>();
+            growBullet.enabled = true;
+            growBullet.growRate += (haveGrow - 1) * 0.5f;
+        }
+            
+        if (haveMagic != 0) {
+            tempBullet.GetComponent<MagicBullet>().enabled = true;
+        }
+
         tempBullet.damage = this.damage; // 총알의 데미지 설정
         tempBullet.popTime = range / shotSpeed; // 총알의 사정거리 설정
     }

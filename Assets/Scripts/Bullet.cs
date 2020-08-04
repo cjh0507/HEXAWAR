@@ -8,9 +8,11 @@ public class Bullet : MonoBehaviour
 {
     public float popTime;
     public float damage;
+
     // Start is called before the first frame update
     void Start()
     {
+        ScaleByDamage();
         Invoke("DestroyBullet", popTime);
     }
 
@@ -23,5 +25,10 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {   
         
+    }
+
+    public void ScaleByDamage() {
+        float scale = (damage - 5) * 0.1f;
+        transform.localScale = new Vector3(1 + scale, 1 + scale);
     }
 }
