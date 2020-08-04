@@ -15,7 +15,19 @@ public class RotSpeedCell : BoosterCell
         coreCell.rotSpeed += delta;
     }
     
+    
     public override void CanCelEffects() {
         coreCell.rotSpeed -= delta;
+    }
+
+    // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
+    protected override void ResetStatus() {
+
+        // mass = 0.2f;
+        // maxDurability = 50;
+        // if (durability > maxDurability)
+        //     durability = maxDurability;
+        base.ResetStatus();
+        delta = 0.4f;
     }
 }

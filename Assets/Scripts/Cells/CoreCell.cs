@@ -38,6 +38,7 @@ public class CoreCell : Cell
         durability = 100;
         cellType = "CoreCell";
         coreCell = this;
+        isAttached = true;
         base.Awake();
     }
 
@@ -49,9 +50,11 @@ public class CoreCell : Cell
 
     void FixedUpdate()
     {
-        // 이동에 관한 입력에 반응해야 함
-        SetVelocity();
-        Rotate();
+        // 플레이어(8번 레이어)의 것이라면 이동에 관한 입력에 반응해야 함
+        if(gameObject.layer == 8) {
+            SetVelocity();
+            Rotate();
+        }
         // 공격은 입력없이 지속적으로 발사됨
         if(canAttack) {
             canAttack = false;
@@ -148,8 +151,4 @@ public class CoreCell : Cell
     public void DecreaseMass(float mass) {
         rigidBody.mass -= mass;
     }
-    private void OnCollisionEnter2D(Collision2D other) {
-        
-    }
-
 }

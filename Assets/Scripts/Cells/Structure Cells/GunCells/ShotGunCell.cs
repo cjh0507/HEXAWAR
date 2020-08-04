@@ -14,8 +14,26 @@ public class ShotGunCell : GunCell
     
     protected override void Awake() {
         base.Awake();
+        /*
         range *= 0.5f;
         coolTime *= 2;
+        */
+    }
+
+    // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
+    protected override void ResetStatus() {
+
+        // mass = 0.2f;
+        // maxDurability = 50;
+        // if (durability > maxDurability)
+        //     durability = maxDurability;
+        base.ResetStatus();
+        haveGrow = 0;
+        haveMagic = 0;
+        damage = 2.5f;
+        coolTime = 1f;
+        range = 3;
+        shotSpeed = 5;
     }
 
     // (마우스 커서 방향으로) 총알을 발사한다

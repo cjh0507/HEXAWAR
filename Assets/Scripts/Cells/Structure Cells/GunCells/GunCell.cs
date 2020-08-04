@@ -12,9 +12,9 @@ public class GunCell : Cell
     private bool canAttack = true;
 
     // -----------------------------[FEATURE CHECK]-----------------------------
-    [HideInInspector]
+    // [HideInInspector]
     public int haveGrow = 0;
-    [HideInInspector]
+    // [HideInInspector]
     public int haveMagic = 0;
     // -----------------------------[GUNCELL STATUS]-----------------------------
     // [공격 관련 스탯]
@@ -104,5 +104,23 @@ public class GunCell : Cell
 
         return Mathf.Cos(radian);
     }
+
+    // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
+    protected override void ResetStatus() {
+
+        // mass = 0.2f;
+        // maxDurability = 50;
+        // if (durability > maxDurability)
+        //     durability = maxDurability;
+        base.ResetStatus();
+
+        haveGrow = 0;
+        haveMagic = 0;
+        damage = 2.5f; 
+        coolTime = 0.5f; 
+        range = 6;
+        shotSpeed = 5;
+    }
+
 
 }

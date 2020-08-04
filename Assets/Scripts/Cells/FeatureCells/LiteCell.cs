@@ -7,7 +7,7 @@ public class LiteCell : FeatureCell
 {
     
     protected override void Start() {
-        mass = 0.1f;
+        // mass = 0.1f;
         base.Start();
     }
 

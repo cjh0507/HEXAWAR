@@ -9,8 +9,9 @@ public class RepairCell : FeatureCell
     float coolTime = 0.1f;
     float repairAmount = 0.5f;
 
-    void Update()
+    protected override void Update()
     {
+        base.Update();
         if (isAttached && canHeal) {
             canHeal = false;
             RepairAdjacentCells();

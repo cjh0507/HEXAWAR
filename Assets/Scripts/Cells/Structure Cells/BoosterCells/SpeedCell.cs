@@ -23,4 +23,16 @@ public class SpeedCell : BoosterCell
         coreCell.speed -= speedDelta;
         coreCell.acceleration -= accelDelta;
     }
+
+    // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
+    protected override void ResetStatus() {
+
+        // mass = 0.2f;
+        // maxDurability = 50;
+        // if (durability > maxDurability)
+        //     durability = maxDurability;
+        base.ResetStatus();
+        speedDelta = 1f;
+        accelDelta = 2.5f;
+    }
 }

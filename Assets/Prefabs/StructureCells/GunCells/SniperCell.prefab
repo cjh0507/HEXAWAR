@@ -107,7 +107,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05}
+  m_Size: {x: 0.08, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &5522055066956177214
 MonoBehaviour:
@@ -123,6 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   attachedCell: {fileID: 7421666779727301151}
+  coreCell: {fileID: 0}
   isAttachable: 0
 --- !u!1 &384890751140648175
 GameObject:
@@ -236,7 +237,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.1}
+  m_Size: {x: 0.08, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &8675005308802627642
 MonoBehaviour:
@@ -252,6 +253,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   attachedCell: {fileID: 7421666779727301151}
+  coreCell: {fileID: 0}
   isAttachable: 0
 --- !u!1 &392848118299217293
 GameObject:
@@ -360,7 +362,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.1}
+  m_Size: {x: 0.08, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &8583398622620916476
 MonoBehaviour:
@@ -376,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   attachedCell: {fileID: 7421666779727301151}
+  coreCell: {fileID: 0}
   isAttachable: 0
 --- !u!1 &2320526935391033600
 GameObject:
@@ -565,7 +568,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05}
+  m_Size: {x: 0.08, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &7562952652159703148
 MonoBehaviour:
@@ -581,6 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5
   attachedCell: {fileID: 7421666779727301151}
+  coreCell: {fileID: 0}
   isAttachable: 0
 --- !u!1 &3447857059032343487
 GameObject:
@@ -770,7 +774,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05}
+  m_Size: {x: 0.08, y: 0.05}
   m_EdgeRadius: 0
 --- !u!114 &4279558428604974364
 MonoBehaviour:
@@ -786,6 +790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   attachedCell: {fileID: 7421666779727301151}
+  coreCell: {fileID: 0}
   isAttachable: 0
 --- !u!1 &7421666779727301151
 GameObject:
@@ -1021,17 +1026,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  rigidBody: {fileID: 0}
   coreCell: {fileID: 0}
   cellType: 
+  maxDurability: 50
   durability: 20
   mass: 0.2
   isAttached: 0
+  polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
-  damage: 2.5
-  coolTime: 0.5
-  range: 6
-  shotSpeed: 5
-  bulletSpread: 1
+  haveGrow: 0
+  haveMagic: 0
+  damage: 5
+  coolTime: 1.5
+  range: 12
+  shotSpeed: 10
+  bulletSpread: 0
 --- !u!50 &-182527127558055811
 Rigidbody2D:
   serializedVersion: 4
@@ -1160,7 +1170,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.1}
+  m_Size: {x: 0.08, y: 0.1}
   m_EdgeRadius: 0
 --- !u!114 &1683397105555885008
 MonoBehaviour:
@@ -1176,4 +1186,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2
   attachedCell: {fileID: 7421666779727301151}
+  coreCell: {fileID: 0}
   isAttachable: 0

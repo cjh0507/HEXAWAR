@@ -7,8 +7,7 @@ public class GluePoint : MonoBehaviour
     public int id; // 0 ~ 5번 중 어느 위치의 gluePoint?
     public GameObject attachedCell; // 이 gluePoint가 부착된 Cell
 
-    [SerializeField]
-    private GameObject coreCell; // 중심 셀
+    public GameObject coreCell; // 중심 셀
 
     public bool isAttachable = false;
 
@@ -83,14 +82,16 @@ public class GluePoint : MonoBehaviour
             }
 
             // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
-            oCell.OnAttach();
+            oCell.StartCoroutine(oCell.OnAttach());
+            oCell.polygonCollider2D.enabled = true;
+            oCell.EnableGluePts();
             
             // 부딪힌 셀이 FeatureCell 종류였으면
             if(oCell.cellType == "FeatureCell") {
                 ((FeatureCell) oCell).GiveFeature();
             }
 
-            otherCell.layer = attachedCell.layer; // 붙은 셀의 소유주 정하기
+            oCell.ChangeLayer(attachedCell.layer); // 붙은 셀의 소유주 정하기
 
             Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
         }

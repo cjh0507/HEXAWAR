@@ -7,8 +7,6 @@ public class HardCell : FeatureCell
 {
     float delta;
     protected override void Start() {
-        // 본인도 단단함
-        maxDurability *= 1.3f;
         durability = maxDurability;
         base.Start();
     }
