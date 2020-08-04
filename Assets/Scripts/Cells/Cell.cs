@@ -9,11 +9,16 @@ public class Cell : MonoBehaviour
     public Cell[] adjacentCells = new Cell[6];
     public GameObject[] gluePoints = new GameObject[6];
 
+    Rigidbody2D rigidBody;
+
+    [SerializeField]
     protected CoreCell coreCell;
 
     public string cellType;
 
     public float durability = 50;
+
+    public float mass = 0.20f;
 
     public bool isAttached = false; // tissue에 소속되어 있는가?
 
@@ -26,10 +31,12 @@ public class Cell : MonoBehaviour
 
     protected virtual void Awake()
     {
+        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.mass = this.mass;
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         for (int i = 0; i < gluePoints.Length; i++) 
         {
-            gluePoints[i] = transform.GetChild(i+2).gameObject;
+            gluePoints[i] = transform.GetChild(i+1).gameObject;
         }
     }
 
@@ -52,9 +59,14 @@ public class Cell : MonoBehaviour
     // 2. FeatureCells 체크
     public void OnAttach() 
     {   
+        // rigidBody 제거
+        Destroy(rigidBody);
         // Raycast하기 전에 자기 자신 + GluePoints의 Collider를 꺼줘야 한다.
         polygonCollider2D.enabled = false;
         DisableGluePts();
+
+        // 코어의 질량 늘리기
+        coreCell.IncreaseMass(this.mass);
 
         SetGluePtsAttachable(); // GluePoints가 모두 attachable하게 만든다
         // this Cell의 중심을 기준으로 6방향으로 RayCast를 해서 닿은 Cell이 있으면 서로의 adjacentCell에 추가한다.
@@ -86,7 +98,7 @@ public class Cell : MonoBehaviour
                 }
             }
         }
-        isAttached = true;
+        
         // Raycast 끝났으니 Collider 킨다
         EnableGluePts();
         polygonCollider2D.enabled = true;

@@ -13,11 +13,13 @@ public class SpeedCell : BoosterCell
         cellType = "SpeedCell";
     }
     public override void UpgradeCoreStatus() {
+        // Debug.Log($"UpgradeStatus() Called - speedDelta = {speedDelta}, accelDelta = {accelDelta}");
         coreCell.speed += speedDelta;
         coreCell.acceleration += accelDelta;
     }
 
     public override void CanCelEffects() {
+        // Debug.Log($"CancelEffects() called - speedDelta = {speedDelta}, accelDelta = {accelDelta}");
         coreCell.speed -= speedDelta;
         coreCell.acceleration -= accelDelta;
     }

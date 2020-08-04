@@ -25,7 +25,7 @@ public class GluePoint : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.tag == "GluePoint") {
             // 그 GluePoint  붙이기
-            if (isAttachable) 
+            if (isAttachable && !other.GetComponent<GluePoint>().isAttachedCellAttached()) 
             {
                 isAttachable = false;
 
@@ -40,6 +40,10 @@ public class GluePoint : MonoBehaviour
         }
     }
 
+    private bool isAttachedCellAttached() {
+        return attachedCell.GetComponent<Cell>().isAttached;
+    }
+
     private void AttachCell(Collider2D other) {
         if (true)
         {
@@ -49,6 +53,8 @@ public class GluePoint : MonoBehaviour
 
             Cell aCell = attachedCell.GetComponent<Cell>();
             Cell oCell =  otherCell.GetComponent<Cell>();
+            oCell.isAttached = true;
+            
             int oCellGPId = other.GetComponent<GluePoint>().id;
             
             // 부딪힌 attached Cell의 GluePoint에 따라서 localPos 정한다
@@ -64,20 +70,20 @@ public class GluePoint : MonoBehaviour
             }
             otherCell.transform.localRotation = localRot;
 
-            // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
-            oCell.OnAttach();
+            
             oCell.FindCore();
             // 부딪힌 셀이 BoosterCell 종류였으면 코어 스테이터스 업데이트
-            if(oCell.cellType == "BoosterCell") {
+            if(oCell.tag == "BoosterCell") {
                 ((BoosterCell) oCell).UpgradeCoreStatus();
             }
+
+            // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
+            oCell.OnAttach();
+            
             // 부딪힌 셀이 FeatureCell 종류였으면
             if(oCell.cellType == "FeatureCell") {
                 ((FeatureCell) oCell).GiveFeature();
             }
-            
-            // 코어의 질량 늘리기
-            coreCell.GetComponent<CoreCell>().IncreaseMass();
 
             Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
         }

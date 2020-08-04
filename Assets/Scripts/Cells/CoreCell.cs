@@ -30,10 +30,15 @@ public class CoreCell : Cell
     public float bulletSpread = 1; // 탄퍼짐 정도
     // -------------------------------------------------------------------------
 
+    protected override void Awake() {
+        mass = 1.0f;
+        cellType = "CoreCell";
+        base.Awake();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        cellType = "CoreCell";
         EnableGluePts();
         rigidBody = GetComponent<Rigidbody2D>();
         // FirePos = transform.Find("FrontPointer");
@@ -119,11 +124,11 @@ public class CoreCell : Cell
         canAttack = true;
     }
 
-    public void IncreaseMass() {
-        rigidBody.mass += 0.2f;
+    public void IncreaseMass(float mass) {
+        rigidBody.mass += mass;
     }
-    public void DecreaseMass() {
-        rigidBody.mass -= 0.2f;
+    public void DecreaseMass(float mass) {
+        rigidBody.mass -= mass;
     }
     private void OnCollisionEnter2D(Collision2D other) {
         

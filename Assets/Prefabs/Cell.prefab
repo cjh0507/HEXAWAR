@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5465208132254561223}
   - component: {fileID: 5465208132254561220}
   - component: {fileID: 6308964040890931980}
+  - component: {fileID: -6336742639938760756}
   m_Layer: 0
   m_Name: Cell
   m_TagString: Cell
@@ -75,7 +76,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_Color: {r: 0.36966002, g: 0.6698113, b: 0.5004243, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: d8af17ded7a836c4298e491f29aea1ba, type: 3}
   m_Sprites: []
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
@@ -198,3 +199,24 @@ PolygonCollider2D:
       - {x: 0.2995627, y: 0.34715745}
       - {x: 0.2638484, y: 0.40901455}
       - {x: 0.25, y: 0.433}
+--- !u!50 &-6336742639938760756
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465208132254561221}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

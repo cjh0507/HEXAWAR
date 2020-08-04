@@ -10,6 +10,7 @@ TagManager:
   - GluePoint
   - GunCell
   - BoosterCell
+  - FeatureCell
   layers:
   - Default
   - TransparentFX
