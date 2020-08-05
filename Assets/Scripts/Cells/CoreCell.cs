@@ -10,7 +10,7 @@ public class CoreCell : Cell
     public GameObject bullet; // Instantiate될 총알
 
     // coolTime 관리용
-    private bool canAttack = true;
+    protected bool canAttack = true;
 
     // -----------------------------[FEATURE CHECK]-----------------------------
     [HideInInspector]
@@ -43,12 +43,12 @@ public class CoreCell : Cell
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         EnableGluePts();
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         // 플레이어(8번 레이어)의 것이라면 이동에 관한 입력에 반응해야 함
         if(gameObject.layer == 8) {
@@ -63,7 +63,7 @@ public class CoreCell : Cell
     }
 
     // 물체의 속도를 지정한다
-    private void SetVelocity()
+    protected virtual void SetVelocity()
     {
         Vector2 vector = GetVector(); // 플레이어 입력으로부터 벡터값을 받는다.
 
@@ -76,7 +76,7 @@ public class CoreCell : Cell
 
 
     // 물체를 회전시킨다
-    private void Rotate() {
+    protected virtual void Rotate() {
         if (Input.GetKey(KeyCode.Q)) {
             transform.Rotate(new Vector3(0, 0, 1) * (rotSpeed * 100 / rigidBody.mass) * Time.deltaTime);
         }
@@ -87,7 +87,7 @@ public class CoreCell : Cell
 
     // 플레이어의 입력으로부터 벡터값을 얻는다.
     // CoreCell의 로컬 좌표계에서 벡터 계산
-    private Vector2 GetVector() {
+    protected virtual Vector2 GetVector() {
         Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         inputVector = transform.localRotation * inputVector; // 로컬 좌표계 기준의 벡터
@@ -96,7 +96,7 @@ public class CoreCell : Cell
     }
 
     // (마우스 커서 방향으로) 총알을 발사한다
-    void FireAutomatically()
+    protected void FireAutomatically()
     {
         Vector2 dir = GetNormalVector();
         // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
