@@ -151,4 +151,28 @@ public class CoreCell : Cell
     public void DecreaseMass(float mass) {
         rigidBody.mass -= mass;
     }
+
+    public int CountChildren() {
+        
+        return Mathf.Max(transform.childCount - 10, 0);
+    }
+
+    protected override void ResetStatus() {
+        base.ResetStatus();
+        mass = 1;
+        maxDurability = 100;
+        // [공격 관련 스탯]
+        haveGrow = 0;
+        haveMagic = 0;
+        damage = 5f; 
+        coolTime = 0.5f; 
+        range = 6;
+        shotSpeed = 5;
+        // [이동 관련 스탯]
+        speed = 10; // Core가 도달 가능한 "최대" 이동 속력
+        acceleration = 5; // Core의 가속도 (얼마나 빠르게 최대 이동 속도에 도달하는가)
+        rotSpeed = 1.5f; // Core의 회전속도
+
+        rigidBody.mass = 1;
+    }
 }

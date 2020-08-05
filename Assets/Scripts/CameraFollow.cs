@@ -10,11 +10,15 @@ public class CameraFollow : MonoBehaviour
 	public GameObject player;
 	public Vector2 minPos, maxPos;
 	public bool bound;
+    private Camera cam;
+
+    private float coeff = 0.1f;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("PlayerCoreCell");
+        cam = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -35,6 +39,11 @@ public class CameraFollow : MonoBehaviour
 			transform.position = new Vector3 (Mathf.Clamp (transform.position.x, minPos.x, maxPos.x),
                 Mathf.Clamp (transform.position.y, minPos.y, maxPos.y),
                 Mathf.Clamp (transform.position.z, transform.position.z, transform.position.z));
+            
         }
+    }
+
+    public void ChangeSize(int childCount) {
+        cam.orthographicSize = 5.5f + childCount * (coeff);
     }
 }

@@ -17,6 +17,8 @@ public class Cell : MonoBehaviour
 
     public string cellType;
 
+    private CameraFollow cameraFollow;
+
 
     // -----------------------------------[CELL STATUS]-----------------------------------
     public float maxDurability = 50;
@@ -47,6 +49,7 @@ public class Cell : MonoBehaviour
             gluePoints[i] = transform.GetChild(i+1).gameObject;
         }
         FindCore();
+        cameraFollow = GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
     }
 
     protected virtual void Update() {
@@ -174,7 +177,8 @@ public class Cell : MonoBehaviour
                 cell.coreCell = null;
                 cell.transform.parent = null;
             }
-            // Debug.Log($"tempCoreCell : {tempCoreCell.name}");
+            tempCoreCell.ResetStatus();
+            tempCoreCell.adjacentCells = new Cell[6];
             tempCoreCell.EnableGluePts();
             tempCoreCell.SetGluePtsAttachable(true);
         }
@@ -263,6 +267,11 @@ public class Cell : MonoBehaviour
         // Raycast 끝났으니 Collider 킨다
         polygonCollider2D.enabled = true;
         EnableGluePts();
+        
+        if (gameObject.layer == LayerMask.NameToLayer("Player")) {
+            Debug.Log($"reached");
+            cameraFollow.ChangeSize(coreCell.CountChildren());
+        }
         yield return null;
     }
 
