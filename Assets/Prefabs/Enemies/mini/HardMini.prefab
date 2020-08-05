@@ -1234,6 +1234,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 2748255400104841087}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
+  dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
@@ -6811,6 +6813,8 @@ MonoBehaviour:
   rigidBody: {fileID: 4053092505084719573}
   coreCell: {fileID: 2748255400104841087}
   cellType: CoreCell
+  attachEffect: {fileID: 0}
+  dieEffect: {fileID: 0}
   maxDurability: 120
   durability: 120
   mass: 1
@@ -6827,6 +6831,7 @@ MonoBehaviour:
   acceleration: 5
   rotSpeed: 1.5
   bulletSpread: 1
+  childCellCount: 0
 --- !u!1 &8592427220437945095
 GameObject:
   m_ObjectHideFlags: 0
