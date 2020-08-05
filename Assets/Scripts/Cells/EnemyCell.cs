@@ -8,11 +8,15 @@ using UnityEngine;
 public class EnemyCell : CoreCell
 {
     public bool playerNoticed = false;
-    private bool canMove = true;
+    protected bool canMove = true;
 
     GameObject player;
     Transform playerTr;
     Vector2 EnemyVec = new Vector2(0, 0);
+
+    float stoppingDistance = 0.0f;
+
+    private float moveTimer = 0;
 
     protected override void Start()
     {
@@ -23,9 +27,14 @@ public class EnemyCell : CoreCell
     }
     protected override void FixedUpdate() {
         // 플레이어 발견 시에만 공격시작
-        if(playerNoticed && canAttack) {
-            canAttack = false;
-            FireAutomatically();
+        Rotate();
+        if(playerNoticed) {
+            if (canAttack) {
+                canAttack = false;
+                FireAutomatically();
+            }
+            StopCoroutine("Patrol");
+            ChasePlayer();
         }
     }
 
@@ -43,26 +52,50 @@ public class EnemyCell : CoreCell
         //     }
         // }
     }
+    
+    void ChasePlayer() {
+        Vector3 curPlayerPos = playerTr.position;
+        // 먼 상태 ()
+        if (Vector2.Distance(transform.position, playerTr.position) > stoppingDistance)
+            if (Mathf.Abs(rigidBody.velocity.magnitude) < speed * 0.8) {
+                rigidBody.AddForce((curPlayerPos - transform.position) * acceleration);
+            }
+    }
 
     IEnumerator Patrol() {
-        EnemyVec = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
-        if (Mathf.Abs(rigidBody.velocity.magnitude) < speed)
-            rigidBody.AddForce(EnemyVec * acceleration * 10);
-        
-        yield return new WaitForSeconds(4f);
+        EnemyVec = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2)).normalized;
+
+        while ( moveTimer < 1.5) {
+            if (Mathf.Abs(rigidBody.velocity.magnitude) < (speed / 5))
+                rigidBody.AddForce(EnemyVec * acceleration);
+            
+            moveTimer += Time.fixedDeltaTime;
+            yield return new WaitForSeconds(Time.fixedDeltaTime);
+        }
+
+        moveTimer = 0;
         StartCoroutine("Patrol");
     }
 
     protected override void Rotate() {
         // 플레이어가 인식범위 내에 들어왔을 경우
         if (playerNoticed) {
+            // transform.Rotate(new Vector3(0, 0, Vector3.RotateTowards(transform.position, playerTr.position, 100f, 100.0f).z));
+            // Vector2 playerNormal = playerTr.rotation * (Vector2.up);
+            Vector2 myRot = transform.rotation * Vector2.up;
+            //Quaternion toPlayerRot = Quaternion.Euler(playerTr.position - transform.position);
             
+            Quaternion toPlayerRot = Quaternion.FromToRotation(myRot, playerTr.position - transform.position );
+            //Debug.Log($"myRot: {myRot}, toPlayerRot : {toPlayerRot.eulerAngles}");
+            if (toPlayerRot.eulerAngles.z > 185) 
+                transform.Rotate(-toPlayerRot.eulerAngles.normalized * (rotSpeed * 200 / rigidBody.mass) * Time.deltaTime);
+            else if (toPlayerRot.eulerAngles.z < 175) 
+                transform.Rotate(toPlayerRot.eulerAngles.normalized * (rotSpeed * 200 / rigidBody.mass) * Time.deltaTime);
         }
         // 플레이어가 인식범위에 없을 경우 순찰모드
         else {
             
         }
-
     }
 
     
