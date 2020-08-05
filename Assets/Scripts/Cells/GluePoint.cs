@@ -85,6 +85,7 @@ public class GluePoint : MonoBehaviour
                 if(oCell.cellType == "FeatureCell") {
                     ((FeatureCell) oCell).GiveFeature();
                 }
+                // coreCell.GetComponent<CoreCell>().childCellCount++;
                 // Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
             }
         }

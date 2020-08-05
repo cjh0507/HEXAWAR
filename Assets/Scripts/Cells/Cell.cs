@@ -19,7 +19,7 @@ public class Cell : MonoBehaviour
 
     private CameraFollow cameraFollow;
 
-
+    public GameObject attachEffect;
     // -----------------------------------[CELL STATUS]-----------------------------------
     public float maxDurability = 50;
     public float durability = 50;
@@ -260,19 +260,31 @@ public class Cell : MonoBehaviour
                         // this Cell에게 Feature 적용
                         ((FeatureCell) hitCell).GiveFeature(hitGluePtId);
                     }
+
+                    if(gameObject.layer == LayerMask.NameToLayer("Player")) {
+                        ShowAttachEffect();
+                    }
                 }
             }
         }
-        
         // Raycast 끝났으니 Collider 킨다
         polygonCollider2D.enabled = true;
         EnableGluePts();
         
         if (gameObject.layer == LayerMask.NameToLayer("Player")) {
             Debug.Log($"reached");
-            cameraFollow.ChangeSize(coreCell.CountChildren());
+            coreCell.childCellCount++;
+            cameraFollow.ChangeSize(coreCell.childCellCount);
         }
         yield return null;
+    }
+
+    void ShowAttachEffect() {
+        for (int i = 0; i < localPosArr.Length; i++)
+        {
+            GameObject effect = Instantiate(attachEffect, (Vector2) transform.position + localPosArr[i] * 0.5f, Quaternion.Euler(new Vector3(0, 0, -60 * i)));
+            effect.transform.parent = coreCell.transform;
+        }
     }
 
     public int SearchCell(Cell targetCell) {

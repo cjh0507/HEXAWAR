@@ -237,6 +237,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 0}
   cellType: 
+  attachEffect: {fileID: 1814553308253870096, guid: 20d62f73056765b4486f900a633574a4,
+    type: 3}
   maxDurability: 50
   durability: 20
   mass: 0.2

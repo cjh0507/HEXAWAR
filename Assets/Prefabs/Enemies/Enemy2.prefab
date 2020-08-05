@@ -236,10 +236,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &222376319219791808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,10 +2351,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: SpeedCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   speedDelta: 1
   accelDelta: 2.5
 --- !u!1 &904826382944734567
@@ -2591,10 +2595,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: RotSpeedCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   delta: 0.4
 --- !u!1 &904826383702704052
 GameObject:
@@ -2832,10 +2838,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: SpeedCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   speedDelta: 1
   accelDelta: 2.5
 --- !u!1 &911236793924122987
@@ -4147,10 +4155,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &1393690558787189415
 GameObject:
   m_ObjectHideFlags: 0
@@ -4718,10 +4728,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &1761492106605920771
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,10 +5306,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 65
   durability: 65
   mass: 0.1
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &1887143473497398271
 GameObject:
   m_ObjectHideFlags: 0
@@ -6071,10 +6085,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: SpeedCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   speedDelta: 1
   accelDelta: 2.5
 --- !u!1 &2093524093193478969
@@ -6313,10 +6329,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: GunCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 1
   haveMagic: 0
@@ -6561,10 +6579,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: GunCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 1
   haveMagic: 0
@@ -6809,10 +6829,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: GunCell
+  attachEffect: {fileID: 0}
   maxDurability: 65
   durability: 65
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 0
   haveMagic: 0
@@ -7057,10 +7079,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: GunCell
+  attachEffect: {fileID: 0}
   maxDurability: 65
   durability: 65
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 0
   haveMagic: 0
@@ -15344,10 +15368,12 @@ MonoBehaviour:
   rigidBody: {fileID: 8993279727586111480}
   coreCell: {fileID: 7120813139241652562}
   cellType: CoreCell
+  attachEffect: {fileID: 0}
   maxDurability: 100
   durability: 100
   mass: 0.7
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 2
   haveMagic: 0
@@ -16301,10 +16327,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: RotSpeedCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   delta: 0.4
 --- !u!1 &3744873673002229049
 GameObject:
@@ -16542,10 +16570,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: RotSpeedCell
+  attachEffect: {fileID: 0}
   maxDurability: 65
   durability: 65
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
   delta: 0.4
 --- !u!1 &3800429274001468637
 GameObject:
@@ -18299,10 +18329,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &5068683368335517953
 GameObject:
   m_ObjectHideFlags: 0
@@ -18539,10 +18571,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &5068683368398775830
 GameObject:
   m_ObjectHideFlags: 0
@@ -18779,10 +18813,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.1
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &5068683368994424846
 GameObject:
   m_ObjectHideFlags: 0
@@ -19019,10 +19055,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &5068683369536132021
 GameObject:
   m_ObjectHideFlags: 0
@@ -19259,10 +19297,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &5207245561020266476
 GameObject:
   m_ObjectHideFlags: 0
@@ -24359,10 +24399,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &7762177334613910213
 GameObject:
   m_ObjectHideFlags: 0
@@ -28323,10 +28365,12 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 7120813139241652562}
   cellType: FeatureCell
+  attachEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
   mass: 0.2
   isAttached: 1
+  polygonCollider2D: {fileID: 0}
 --- !u!1 &8879819720016258728
 GameObject:
   m_ObjectHideFlags: 0
