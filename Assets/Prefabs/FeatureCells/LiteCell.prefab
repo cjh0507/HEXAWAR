@@ -794,7 +794,7 @@ SpriteShapeRenderer:
   m_SortingLayerID: -1880696577
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Color: {r: 0.2235294, g: 1, b: 0.67734987, a: 1}
+  m_Color: {r: 0.30588236, g: 0.72156864, b: 0.69411767, a: 0.72156864}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: d8af17ded7a836c4298e491f29aea1ba, type: 3}
   m_Sprites: []
@@ -948,6 +948,8 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 0}
   cellType: 
+  attachEffect: {fileID: 1814553308253870096, guid: 20d62f73056765b4486f900a633574a4,
+    type: 3}
   maxDurability: 50
   durability: 50
   mass: 0.2

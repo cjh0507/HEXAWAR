@@ -19,7 +19,8 @@ public class Cell : MonoBehaviour
 
     private CameraFollow cameraFollow;
 
-
+    public GameObject attachEffect;
+    public GameObject dieEffect;
     // -----------------------------------[CELL STATUS]-----------------------------------
     public float maxDurability = 50;
     public float durability = 50;
@@ -62,7 +63,13 @@ public class Cell : MonoBehaviour
     protected virtual void Die() {
 
         // <TODO> : 적절한 애니메이션(이펙트) 실행
+        if(cellType == "CoreCell") 
+            ShowDieEffect();
         Decompose();
+    }
+
+    public void ShowDieEffect() {
+        Instantiate(dieEffect, transform.position, Quaternion.identity);
     }
 
     protected virtual void Decompose() {
@@ -195,9 +202,6 @@ public class Cell : MonoBehaviour
 
     // Cell이 적대적인 총알에 맞았을 때 호출되는 함수
     public void CellHit(float damage) {
-
-        // <TODO> : 적절한 애니메이션(이펙트) 실행
-
         durability -= damage;
 
         // 죽었는지 체크
@@ -260,19 +264,31 @@ public class Cell : MonoBehaviour
                         // this Cell에게 Feature 적용
                         ((FeatureCell) hitCell).GiveFeature(hitGluePtId);
                     }
+
+                    if(gameObject.layer == LayerMask.NameToLayer("Player")) {
+                        ShowAttachEffect();
+                    }
                 }
             }
         }
-        
         // Raycast 끝났으니 Collider 킨다
         polygonCollider2D.enabled = true;
         EnableGluePts();
         
         if (gameObject.layer == LayerMask.NameToLayer("Player")) {
-            Debug.Log($"reached");
-            cameraFollow.ChangeSize(coreCell.CountChildren());
+            // Debug.Log($"reached");
+            coreCell.childCellCount++;
+            cameraFollow.ChangeSize(coreCell.childCellCount);
         }
         yield return null;
+    }
+
+    void ShowAttachEffect() {
+        for (int i = 0; i < localPosArr.Length; i++)
+        {
+            GameObject effect = Instantiate(attachEffect, (Vector2) transform.position + localPosArr[i] * 0.5f, Quaternion.Euler(new Vector3(0, 0, -60 * i)));
+            effect.transform.parent = coreCell.transform;
+        }
     }
 
     public int SearchCell(Cell targetCell) {

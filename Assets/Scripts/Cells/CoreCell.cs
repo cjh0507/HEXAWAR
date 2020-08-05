@@ -32,6 +32,8 @@ public class CoreCell : Cell
     public float bulletSpread = 1; // 탄퍼짐 정도
     // -------------------------------------------------------------------------
 
+    public int childCellCount = 0; // 자식 셀 개수
+
     protected override void Awake() {
         mass = 1.0f;
         maxDurability = 100;
@@ -173,6 +175,7 @@ public class CoreCell : Cell
         acceleration = 5; // Core의 가속도 (얼마나 빠르게 최대 이동 속도에 도달하는가)
         rotSpeed = 1.5f; // Core의 회전속도
 
+        childCellCount = 0;
         rigidBody.mass = 1;
     }
 }

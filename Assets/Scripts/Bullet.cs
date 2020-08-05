@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     public float popTime;
     public float damage;
 
+    public GameObject popEffect;
+
     const int playerLayer = 8;
     const int enemyLayer = 9;
 
@@ -39,9 +41,16 @@ public class Bullet : MonoBehaviour
                 if (otherLayer != playerLayer && otherLayer != enemyLayer)
                     return;
                 other.GetComponent<Cell>().CellHit(damage);
+                ShowPopEffect();
                 DestroyBullet();
             }
-            
+        }
+    }
+
+    void ShowPopEffect() {
+        GameObject tempEff = Instantiate(popEffect, transform.position, Quaternion.identity);
+        foreach (Transform child in tempEff.transform) {
+            child.localScale *= transform.localScale.x * 2;
         }
     }
 
@@ -56,6 +65,6 @@ public class Bullet : MonoBehaviour
 
     public void ScaleByDamage() {
         float scale = (damage - 5) * 0.1f;
-        transform.localScale = new Vector3(1 + scale, 1 + scale);
+        transform.localScale = new Vector3((1 + scale) * 2f, 1 + scale) * 0.1f;
     }
 }
