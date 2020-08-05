@@ -276,7 +276,7 @@ public class Cell : MonoBehaviour
         EnableGluePts();
         
         if (gameObject.layer == LayerMask.NameToLayer("Player")) {
-            Debug.Log($"reached");
+            // Debug.Log($"reached");
             coreCell.childCellCount++;
             cameraFollow.ChangeSize(coreCell.childCellCount);
         }

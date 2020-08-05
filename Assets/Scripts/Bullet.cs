@@ -48,7 +48,10 @@ public class Bullet : MonoBehaviour
     }
 
     void ShowPopEffect() {
-        Instantiate(popEffect, transform.position, Quaternion.identity);
+        GameObject tempEff = Instantiate(popEffect, transform.position, Quaternion.identity);
+        foreach (Transform child in tempEff.transform) {
+            child.localScale *= transform.localScale.x * 2;
+        }
     }
 
     public static bool isCell(Collider2D other) {
@@ -62,6 +65,6 @@ public class Bullet : MonoBehaviour
 
     public void ScaleByDamage() {
         float scale = (damage - 5) * 0.1f;
-        transform.localScale = new Vector3(1 + scale, 1 + scale);
+        transform.localScale = new Vector3((1 + scale) * 2f, 1 + scale) * 0.1f;
     }
 }

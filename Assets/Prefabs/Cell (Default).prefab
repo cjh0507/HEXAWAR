@@ -363,6 +363,7 @@ MonoBehaviour:
   coreCell: {fileID: 0}
   cellType: 
   attachEffect: {fileID: 0}
+  dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 20
   mass: 0.2
