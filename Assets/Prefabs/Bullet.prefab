@@ -137,6 +137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popTime: 1
   damage: 0
+  popEffect: {fileID: 4912461426834433001, guid: 71a2551d43c688b499858404fe29d6e5,
+    type: 3}
 --- !u!114 &2765226047674361456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cae34d8cbd969b34684473b85b6d54b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  growRate: 1
 --- !u!114 &-3615858848250074774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,3 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 652f85e4779ff2643ab20651f6a50229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magicRate: 1

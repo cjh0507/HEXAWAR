@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     public float popTime;
     public float damage;
 
+    public GameObject popEffect;
+
     const int playerLayer = 8;
     const int enemyLayer = 9;
 
@@ -40,8 +42,13 @@ public class Bullet : MonoBehaviour
                     return;
                 other.GetComponent<Cell>().CellHit(damage);
             }
+            ShowPopEffect();
             DestroyBullet();
         }
+    }
+
+    void ShowPopEffect() {
+        Instantiate(popEffect, transform.position, Quaternion.identity);
     }
 
     public static bool isCell(Collider2D other) {
