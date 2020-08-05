@@ -41,9 +41,9 @@ public class Bullet : MonoBehaviour
                 if (otherLayer != playerLayer && otherLayer != enemyLayer)
                     return;
                 other.GetComponent<Cell>().CellHit(damage);
+                ShowPopEffect();
+                DestroyBullet();
             }
-            ShowPopEffect();
-            DestroyBullet();
         }
     }
 
