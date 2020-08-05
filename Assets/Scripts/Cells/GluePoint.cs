@@ -28,13 +28,7 @@ public class GluePoint : MonoBehaviour
             if (isAttachable && !other.GetComponent<GluePoint>().isAttachedCellAttached()) 
             {
                 isAttachable = false;
-
-                // 부딪히면 잠시 동안 두 Cell의 GluePoint들의 Collider를 모두 비활성화 시킨다
-                // attachedCell.GetComponent<Cell>().DisableGluePts();
-                // other.GetComponent<GluePoint>().attachedCell.GetComponent<Cell>().DisableGluePts();
-                // StartCoroutine("DelayedEnableGluePts", other);
-
-                AttachCell(other);
+                StartCoroutine( AttachCell(other) );
             }
 
         }
@@ -44,7 +38,7 @@ public class GluePoint : MonoBehaviour
         return attachedCell.GetComponent<Cell>().isAttached;
     }
 
-    private void AttachCell(Collider2D other) {
+    private IEnumerator AttachCell(Collider2D other) {
         if (true)
         {
             GameObject otherCell = other.GetComponent<GluePoint>().attachedCell; // 부딪힌 GluePoint를 갖고 있는 Cell 찾기
@@ -55,46 +49,48 @@ public class GluePoint : MonoBehaviour
 
             Cell aCell = attachedCell.GetComponent<Cell>();
             Cell oCell =  otherCell.GetComponent<Cell>();
-            if(oCell.cellType == "CoreCell")
-                return;
-            oCell.isAttached = true;
-            
-            int oCellGPId = other.GetComponent<GluePoint>().id;
-            
-            // 부딪힌 attached Cell의 GluePoint에 따라서 localPos 정한다
-            Vector2 localPos = localPosArr[this.id];
-            // 충돌한 GluePoint 둘의 관계에 따라 localRotation을 설정한다
-            Quaternion localRot = Quaternion.Euler(new Vector3(0, 0, 60 * (oCellGPId-this.id+3)));
+            if(oCell.cellType != "CoreCell") {
+                
+                oCell.isAttached = true;
+                
+                int oCellGPId = other.GetComponent<GluePoint>().id;
+                
+                // 부딪힌 attached Cell의 GluePoint에 따라서 localPos 정한다
+                Vector2 localPos = localPosArr[this.id];
+                // 충돌한 GluePoint 둘의 관계에 따라 localRotation을 설정한다
+                Quaternion localRot = Quaternion.Euler(new Vector3(0, 0, 60 * (oCellGPId-this.id+3)));
 
-            if(attachedCell.GetComponent<Cell>().cellType == "CoreCell") {
-                otherCell.transform.localPosition = localPos;
-            } else {
-                otherCell.transform.localPosition = (Vector2) attachedCell.transform.localPosition + (Vector2) (attachedCell.transform.localRotation * localPos);
-                localRot = attachedCell.transform.localRotation * localRot;
+                if(attachedCell.GetComponent<Cell>().cellType == "CoreCell") {
+                    otherCell.transform.localPosition = localPos;
+                } else {
+                    otherCell.transform.localPosition = (Vector2) attachedCell.transform.localPosition + (Vector2) (attachedCell.transform.localRotation * localPos);
+                    localRot = attachedCell.transform.localRotation * localRot;
+                }
+                otherCell.transform.localRotation = localRot;
+
+                
+                oCell.FindCore();
+                // 부딪힌 셀이 BoosterCell 종류였으면 코어 스테이터스 업데이트
+                if(oCell.tag == "BoosterCell") {
+                    ((BoosterCell) oCell).UpgradeCoreStatus();
+                }
+
+                // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
+                oCell.StartCoroutine(oCell.OnAttach());
+                oCell.polygonCollider2D.enabled = true;
+                oCell.EnableGluePts();
+                
+                // 부딪힌 셀이 FeatureCell 종류였으면
+                if(oCell.cellType == "FeatureCell") {
+                    ((FeatureCell) oCell).GiveFeature();
+                }
+
+                oCell.ChangeLayer(attachedCell.layer); // 붙은 셀의 소유주 정하기
+
+                // Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
             }
-            otherCell.transform.localRotation = localRot;
-
-            
-            oCell.FindCore();
-            // 부딪힌 셀이 BoosterCell 종류였으면 코어 스테이터스 업데이트
-            if(oCell.tag == "BoosterCell") {
-                ((BoosterCell) oCell).UpgradeCoreStatus();
-            }
-
-            // 서로 부딪힌 Cell들의 adjacentCells와 GluePoints의 isAttachable 업데이트
-            oCell.StartCoroutine(oCell.OnAttach());
-            oCell.polygonCollider2D.enabled = true;
-            oCell.EnableGluePts();
-            
-            // 부딪힌 셀이 FeatureCell 종류였으면
-            if(oCell.cellType == "FeatureCell") {
-                ((FeatureCell) oCell).GiveFeature();
-            }
-
-            oCell.ChangeLayer(attachedCell.layer); // 붙은 셀의 소유주 정하기
-
-            Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
         }
+        yield return null;
     }
 
     IEnumerator DelayedEnableGluePts(Collider2D other) {

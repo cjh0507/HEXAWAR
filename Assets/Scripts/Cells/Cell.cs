@@ -119,7 +119,7 @@ public class Cell : MonoBehaviour
             CoreCell tempCoreCell = coreCell;
             // 일반 셀이 부서졌을 때
             SetGluePtsAttachable(false);
-            Debug.Log("cell dead");
+            // Debug.Log("cell dead");
              
             foreach(Transform child in coreCell.transform) {
                 if(Bullet.isCell(child.tag)) {
@@ -137,7 +137,7 @@ public class Cell : MonoBehaviour
                 // 4. gluePoints 활성화 및 gluePoints의 coreCell = null (done)
                 // 5. 부모로부터 독립시킨다 (done)
                 
-                Debug.Log(child.name);
+                // Debug.Log(child.name);
                 if(Bullet.isCell(child.tag)) {
                     // [Step 1]
                     ChangeLayersRecursively(child, 0);
@@ -174,7 +174,7 @@ public class Cell : MonoBehaviour
                 cell.coreCell = null;
                 cell.transform.parent = null;
             }
-            Debug.Log($"tempCoreCell : {tempCoreCell.name}");
+            // Debug.Log($"tempCoreCell : {tempCoreCell.name}");
             tempCoreCell.EnableGluePts();
             tempCoreCell.SetGluePtsAttachable(true);
         }
@@ -234,7 +234,7 @@ public class Cell : MonoBehaviour
             Debug.DrawLine(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId]) * 1.1f), Color.white, 5f); // 나중에 지우자
 
             if (hits[thisCellId].collider != null && hits[thisCellId].collider.tag == "GluePoint") {
-                Debug.Log($"LineCast from {gameObject.name} hit {hits[thisCellId].collider.name}"); // 나중에 지우자
+                // Debug.Log($"LineCast from {gameObject.name} hit {hits[thisCellId].collider.name}"); // 나중에 지우자
                 GameObject hitGluePt = hits[thisCellId].collider.gameObject;
 
                 int hitGluePtId = hitGluePt.GetComponent<GluePoint>().id;
