@@ -14,19 +14,10 @@ public class ShotGunCell : GunCell
     
     protected override void Awake() {
         base.Awake();
-        /*
-        range *= 0.5f;
-        coolTime *= 2;
-        */
     }
 
     // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
     protected override void ResetStatus() {
-
-        // mass = 0.2f;
-        // maxDurability = 50;
-        // if (durability > maxDurability)
-        //     durability = maxDurability;
         base.ResetStatus();
         haveGrow = 0;
         haveMagic = 0;
@@ -39,8 +30,6 @@ public class ShotGunCell : GunCell
     // (마우스 커서 방향으로) 총알을 발사한다
     protected override void FireAutomatically() {
         Vector2 dir = GetNormalVector();
-        // 마우스 커서 방향 얻어오기
-        // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
         dir = SetBulletSpread(dir);
 
         float radian5 = (float) (Mathf.PI * 5 / 180.0);

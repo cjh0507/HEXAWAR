@@ -9813,15 +9813,15 @@ MonoBehaviour:
     type: 3}
   dieEffect: {fileID: 5996741028553721595, guid: 1ade9d9a412743e43bc2aeaf68e1e7a0,
     type: 3}
-  maxDurability: 50
-  durability: 20
+  maxDurability: 200
+  durability: 200
   mass: 0.2
   isAttached: 0
   polygonCollider2D: {fileID: 0}
   bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 0
   haveMagic: 0
-  damage: 0.1
+  damage: 5
   coolTime: 0.5
   range: 6
   shotSpeed: 5

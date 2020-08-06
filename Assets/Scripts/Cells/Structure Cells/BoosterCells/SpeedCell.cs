@@ -13,24 +13,17 @@ public class SpeedCell : BoosterCell
         cellType = "SpeedCell";
     }
     public override void UpgradeCoreStatus() {
-        // Debug.Log($"UpgradeStatus() Called - speedDelta = {speedDelta}, accelDelta = {accelDelta}");
         coreCell.speed += speedDelta;
         coreCell.acceleration += accelDelta;
     }
 
     public override void CanCelEffects() {
-        // Debug.Log($"CancelEffects() called - speedDelta = {speedDelta}, accelDelta = {accelDelta}");
         coreCell.speed -= speedDelta;
         coreCell.acceleration -= accelDelta;
     }
 
     // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
     protected override void ResetStatus() {
-
-        // mass = 0.2f;
-        // maxDurability = 50;
-        // if (durability > maxDurability)
-        //     durability = maxDurability;
         base.ResetStatus();
         speedDelta = 1f;
         accelDelta = 2.5f;

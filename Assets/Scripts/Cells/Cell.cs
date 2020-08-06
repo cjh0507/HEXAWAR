@@ -25,7 +25,7 @@ public class Cell : MonoBehaviour
     // -----------------------------------[CELL STATUS]-----------------------------------
     public float maxDurability = 50;
     public float durability = 50;
-    private float percentile = 1;
+    public float percentile = 1;
 
     public float mass = 0.20f;
     // -----------------------------------------------------------------------------------
@@ -61,13 +61,14 @@ public class Cell : MonoBehaviour
         originalOpacity = spriteShapeRenderer.color.a;
     }
 
-    protected virtual void Update() {
+    protected virtual void FixedUpdate() {
         SetOpacity();
     }
 
     protected void SetOpacity() {
+        percentile = durability / maxDurability;
         Color tempColor = spriteShapeRenderer.color;
-        tempColor.a = (originalOpacity - 0.5f) * percentile + 0.5f;
+        tempColor.a = (originalOpacity) * (percentile * 0.4f + 0.6f);
         spriteShapeRenderer.color = tempColor;
     }
     
@@ -103,7 +104,6 @@ public class Cell : MonoBehaviour
             foreach(Transform child in transform) {
                 if(Bullet.isCell(child.tag))
                     child.GetComponent<Cell>().SetGluePtsAttachable(false);
-                // Debug.Log(child.name);
             }
 
             List<Cell> cells = new List<Cell>();
@@ -116,7 +116,6 @@ public class Cell : MonoBehaviour
                 // 4. gluePoints 활성화 및 gluePoints의 coreCell = null (done)
                 // 5. 부모로부터 독립시킨다 (done)
 
-                // Debug.Log(child.name);
                 if(Bullet.isCell(child.tag)) {
                     // [Step 1]
                     ChangeLayersRecursively(child, 0);
@@ -155,7 +154,6 @@ public class Cell : MonoBehaviour
             CoreCell tempCoreCell = coreCell;
             // 일반 셀이 부서졌을 때
             SetGluePtsAttachable(false);
-            // Debug.Log("cell dead");
              
             foreach(Transform child in coreCell.transform) {
                 if(Bullet.isCell(child.tag)) {
@@ -173,18 +171,14 @@ public class Cell : MonoBehaviour
                 // 4. gluePoints 활성화 및 gluePoints의 coreCell = null (done)
                 // 5. 부모로부터 독립시킨다 (done)
                 
-                // Debug.Log(child.name);
                 if(Bullet.isCell(child.tag)) {
                     // [Step 1]
                     ChangeLayersRecursively(child, 0);
-                    // Debug.Log($"{child.name} step 1 reached");
-                    // Debug.Log($" child of {coreCell.name} -> {child.name} step 1 reached");
                     // [Step 2]
                     Rigidbody2D childRb = child.gameObject.AddComponent<Rigidbody2D>();
                     if(childRb != null) {
                         childRb.gravityScale = 0;
                         childRb.drag = 0.5f;
-                        // Debug.Log($" child of {coreCell.name} -> {child.name} step 2 reached");
                         childRb.velocity = coreCell.rigidBody.velocity;
                         childRb.angularDrag = 1;
                     }
@@ -232,7 +226,7 @@ public class Cell : MonoBehaviour
     // Cell이 적대적인 총알에 맞았을 때 호출되는 함수
     public void CellHit(float damage) {
         durability -= damage;
-        percentile = durability / maxDurability;
+        // percentile = durability / maxDurability;
         SFXManager.instance.PlayHitSound();
         // 죽었는지 체크
         if (isDead()) {
@@ -269,10 +263,8 @@ public class Cell : MonoBehaviour
 
         for(int thisCellId = 0; thisCellId < hits.Length; thisCellId++) {
             hits[thisCellId] = Physics2D.Linecast(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId])) * 1.1f );
-            Debug.DrawLine(transform.position, transform.position + (transform.rotation * (localPosArr[thisCellId]) * 1.1f), Color.white, 5f); // 나중에 지우자
 
             if (hits[thisCellId].collider != null && hits[thisCellId].collider.tag == "GluePoint") {
-                // Debug.Log($"LineCast from {gameObject.name} hit {hits[thisCellId].collider.name}"); // 나중에 지우자
                 GameObject hitGluePt = hits[thisCellId].collider.gameObject;
 
                 int hitGluePtId = hitGluePt.GetComponent<GluePoint>().id;
@@ -306,7 +298,6 @@ public class Cell : MonoBehaviour
         EnableGluePts();
         
         if (gameObject.layer == LayerMask.NameToLayer("Player")) {
-            // Debug.Log($"reached");
             coreCell.childCellCount++;
             cameraFollow.ChangeSize(coreCell.childCellCount);
         }

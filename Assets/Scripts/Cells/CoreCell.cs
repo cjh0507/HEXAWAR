@@ -36,8 +36,6 @@ public class CoreCell : Cell
 
     protected override void Awake() {
         mass = 1.0f;
-        maxDurability = 100;
-        durability = 100;
         cellType = "CoreCell";
         coreCell = this;
         isAttached = true;
@@ -50,10 +48,15 @@ public class CoreCell : Cell
         EnableGluePts();
     }
 
-    protected virtual void FixedUpdate()
+    protected override void FixedUpdate()
     {
         // 플레이어(8번 레이어)의 것이라면 이동에 관한 입력에 반응해야 함
         if(gameObject.layer == 8) {
+            if(durability > maxDurability) {
+                durability = maxDurability;
+            } else {
+                durability += 0.05f;
+            }
             SetVelocity();
             Rotate();
         }
@@ -62,6 +65,7 @@ public class CoreCell : Cell
             canAttack = false;
             FireAutomatically();
         }
+        base.FixedUpdate();
     }
 
     // 물체의 속도를 지정한다
@@ -92,8 +96,7 @@ public class CoreCell : Cell
     protected virtual Vector2 GetVector() {
         Vector2 inputVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        inputVector = transform.localRotation * inputVector; // 로컬 좌표계 기준의 벡터
-
+        // inputVector = transform.localRotation * inputVector; // 로컬 좌표계 기준의 벡터
         return inputVector.normalized;
     }
 
@@ -101,7 +104,6 @@ public class CoreCell : Cell
     protected void FireAutomatically()
     {
         Vector2 dir = GetNormalVector();
-        // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
         dir = SetBulletSpread(dir);
         
         MakeBullet(dir);
@@ -163,7 +165,7 @@ public class CoreCell : Cell
 
     protected override void ResetStatus() {
         mass = 1;
-        maxDurability = 100;
+        maxDurability = 200;
         if (durability > maxDurability)
             durability = maxDurability;
         // [공격 관련 스탯]

@@ -616,6 +616,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 5371396589690768206}
@@ -2897,6 +2898,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6426224445883144133}
@@ -3141,6 +3143,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6426224444928318165}
@@ -3385,6 +3388,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6426224444003138477}
@@ -17668,6 +17672,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6995675463141600046}
@@ -17912,6 +17917,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6995675462412171759}
@@ -18156,6 +18162,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6995675462566614025}
@@ -18400,6 +18407,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6995675462169651033}
@@ -18644,6 +18652,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6995675462235121835}
@@ -18888,6 +18897,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6995675462043427144}
@@ -21022,14 +21032,17 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 0}
   cellType: 
-  attachEffect: {fileID: 0}
-  dieEffect: {fileID: 0}
+  attachEffect: {fileID: 1814553308253870096, guid: 20d62f73056765b4486f900a633574a4,
+    type: 3}
+  dieEffect: {fileID: 5996741028553721595, guid: 1ade9d9a412743e43bc2aeaf68e1e7a0,
+    type: 3}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 0
   polygonCollider2D: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 0
   haveMagic: 0
   damage: 5
@@ -39580,6 +39593,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1392188861268723641}
@@ -39824,6 +39838,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1392188861328855836}
@@ -40068,6 +40083,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1392188861336448619}
@@ -40312,6 +40328,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1392188860610727288}
@@ -40556,6 +40573,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1392188860653556419}
@@ -41205,6 +41223,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1233593067545928920}
@@ -41449,6 +41468,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1233593067334074596}
@@ -41693,6 +41713,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1233593066809457628}
@@ -41937,6 +41958,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1233593066548385397}
@@ -42181,6 +42203,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1233593066417761597}
@@ -42425,6 +42448,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 1233593065900502084}
@@ -44528,6 +44552,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3206962595654310534}
@@ -44773,6 +44798,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3206962595226340343}
@@ -45018,6 +45044,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3206962594390664010}
@@ -49838,6 +49865,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607211074614606}
@@ -50090,6 +50118,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607210668381983}
@@ -50342,6 +50371,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607210307585538}
@@ -50594,6 +50624,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607210418473155}
@@ -50846,6 +50877,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607210020715719}
@@ -51098,6 +51130,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607210187503185}
@@ -51350,6 +51383,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607209528207928}
@@ -51602,6 +51636,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607209673805744}
@@ -51854,6 +51889,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607209722300693}
@@ -52106,6 +52142,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607209386815421}
@@ -52358,6 +52395,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607209113176382}
@@ -52610,6 +52648,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 3506607209148000139}

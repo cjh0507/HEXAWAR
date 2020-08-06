@@ -933,7 +933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f40512f4a42556b469510299c9dfa4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: SampleScene
+  SceneToLoad: Main Game
   helpPanel: {fileID: 1534066749}
 --- !u!4 &1604089104
 Transform:

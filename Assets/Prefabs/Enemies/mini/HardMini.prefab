@@ -713,6 +713,7 @@ MonoBehaviour:
   dieEffect: {fileID: 0}
   maxDurability: 50
   durability: 50
+  percentile: 1
   mass: 0.2
   isAttached: 1
   polygonCollider2D: {fileID: 6533647113708049279}
@@ -1565,14 +1566,17 @@ MonoBehaviour:
   rigidBody: {fileID: 0}
   coreCell: {fileID: 0}
   cellType: 
-  attachEffect: {fileID: 0}
-  dieEffect: {fileID: 0}
-  maxDurability: 50
-  durability: 50
+  attachEffect: {fileID: 1814553308253870096, guid: 20d62f73056765b4486f900a633574a4,
+    type: 3}
+  dieEffect: {fileID: 5996741028553721595, guid: 1ade9d9a412743e43bc2aeaf68e1e7a0,
+    type: 3}
+  maxDurability: 20
+  durability: 20
+  percentile: 1
   mass: 0.2
   isAttached: 0
   polygonCollider2D: {fileID: 0}
-  bullet: {fileID: 0}
+  bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
   haveGrow: 0
   haveMagic: 0
   damage: 5
@@ -1585,6 +1589,8 @@ MonoBehaviour:
   bulletSpread: 1
   childCellCount: 0
   playerNoticed: 0
+  enemySpeedEff: 0.8
+  stoppingDistance: 2.5
 --- !u!1 &5424730367753456879
 GameObject:
   m_ObjectHideFlags: 0

@@ -33,13 +33,15 @@ public class GunCell : Cell
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    protected override void FixedUpdate()
     {
+
         // 공격은 입력없이 지속적으로 발사됨
         if(isAttached && canAttack) {
             canAttack = false;
             FireAutomatically();
         }
+        base.FixedUpdate();
     }
 
     // vitual => GunCell을 상속받는 Cell들이 오버라이드 가능
@@ -47,7 +49,6 @@ public class GunCell : Cell
     protected virtual void FireAutomatically()
     {
         Vector2 dir = GetNormalVector();
-        // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
         dir = SetBulletSpread(dir);
         MakeBullet(dir);
         if(gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -109,11 +110,6 @@ public class GunCell : Cell
 
     // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
     protected override void ResetStatus() {
-
-        // mass = 0.2f;
-        // maxDurability = 50;
-        // if (durability > maxDurability)
-        //     durability = maxDurability;
         base.ResetStatus();
 
         haveGrow = 0;

@@ -36,21 +36,7 @@ public class EnemyCell : CoreCell
             StopCoroutine("Patrol");
             ChasePlayer();
         }
-    }
-
-    protected override void SetVelocity() {
-        // 플레이어가 인식범위 내에 들어왔을 경우
-        // if (playerNoticed) {
-        //     Vector2 curTr = player.transform.position;
-        // }
-        // 플레이어가 인식범위에 없을 경우 순찰모드
-        // else {
-        //     Vector2 vector = GetVector();
-        //     if (Mathf.Abs(rigidBody.velocity.magnitude) < speed)
-        //     {
-        //         rigidBody.AddForce(vector * acceleration);
-        //     }
-        // }
+        base.FixedUpdate();
     }
     
     void ChasePlayer() {
@@ -58,7 +44,7 @@ public class EnemyCell : CoreCell
         // 먼 상태 ()
         if (Vector2.Distance(transform.position, playerTr.position) > stoppingDistance)
             if (Mathf.Abs(rigidBody.velocity.magnitude) < speed * enemySpeedEff) {
-                rigidBody.AddForce((curPlayerPos - transform.position) * acceleration);
+                rigidBody.AddForce((curPlayerPos - transform.position).normalized * acceleration);
             }
     }
 
@@ -80,21 +66,13 @@ public class EnemyCell : CoreCell
     protected override void Rotate() {
         // 플레이어가 인식범위 내에 들어왔을 경우
         if (playerNoticed) {
-            // transform.Rotate(new Vector3(0, 0, Vector3.RotateTowards(transform.position, playerTr.position, 100f, 100.0f).z));
-            // Vector2 playerNormal = playerTr.rotation * (Vector2.up);
             Vector2 myRot = transform.rotation * Vector2.up;
-            //Quaternion toPlayerRot = Quaternion.Euler(playerTr.position - transform.position);
             
             Quaternion toPlayerRot = Quaternion.FromToRotation(myRot, playerTr.position - transform.position );
-            //Debug.Log($"myRot: {myRot}, toPlayerRot : {toPlayerRot.eulerAngles}");
             if (toPlayerRot.eulerAngles.z > 185) 
                 transform.Rotate(-toPlayerRot.eulerAngles.normalized * (rotSpeed * 200 / rigidBody.mass) * Time.deltaTime);
             else if (toPlayerRot.eulerAngles.z < 175) 
                 transform.Rotate(toPlayerRot.eulerAngles.normalized * (rotSpeed * 200 / rigidBody.mass) * Time.deltaTime);
-        }
-        // 플레이어가 인식범위에 없을 경우 순찰모드
-        else {
-            
         }
     }
 
