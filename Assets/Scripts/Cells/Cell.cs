@@ -248,6 +248,9 @@ public class Cell : MonoBehaviour
     // 2. FeatureCells 체크
     public IEnumerator OnAttach() 
     {   
+        if(gameObject.layer == LayerMask.NameToLayer("Player"))         
+            ShowAttachEffect();
+        
         // rigidBody 제거
         Destroy(rigidBody);
         // Raycast하기 전에 자기 자신 + GluePoints의 Collider를 꺼줘야 한다.
@@ -285,10 +288,6 @@ public class Cell : MonoBehaviour
                     if(hitCell.cellType == "FeatureCell") {
                         // this Cell에게 Feature 적용
                         ((FeatureCell) hitCell).GiveFeature(hitGluePtId);
-                    }
-
-                    if(gameObject.layer == LayerMask.NameToLayer("Player")) {
-                        ShowAttachEffect();
                     }
                 }
             }
