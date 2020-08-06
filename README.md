@@ -7,10 +7,12 @@
 > 여러 기능셀들과 구조셀들을 붙여가며 적을 제거하는 게임
 Cell 종류
 ------------
-## Core Cell : 평범한 이동, 공격의 기능을 가진 셀
+## Cell 종류
 
-## Structure Cell : GunCell, BoosterCell
-#### GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
-#### BoosterCell : AccelerationCell, RotationCell
-#### Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
+1. Core Cell : 평범한 이동, 공격의 기능을 가진 셀
+
+2. Structure Cell : GunCell, BoosterCell
+2-1 GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
+2-2 BoosterCell : AccelerationCell, RotationCell
+3. Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
 
