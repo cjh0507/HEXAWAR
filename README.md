@@ -12,7 +12,7 @@ Cell 종류
 1. Core Cell : 평범한 이동, 공격의 기능을 가진 셀
 
 2. Structure Cell : GunCell, BoosterCell
-2-1 GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
-2-2 BoosterCell : AccelerationCell, RotationCell
+* GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
+* BoosterCell : AccelerationCell, RotationCell
 3. Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
 
