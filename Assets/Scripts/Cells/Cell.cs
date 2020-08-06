@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 // 모든 Cell들이 공통적으로 가져야할 특성에 대해서 정의하는 부분
 public class Cell : MonoBehaviour
@@ -24,6 +25,7 @@ public class Cell : MonoBehaviour
     // -----------------------------------[CELL STATUS]-----------------------------------
     public float maxDurability = 50;
     public float durability = 50;
+    private float percentile = 1;
 
     public float mass = 0.20f;
     // -----------------------------------------------------------------------------------
@@ -37,6 +39,9 @@ public class Cell : MonoBehaviour
     [SerializeField]
     public PolygonCollider2D polygonCollider2D;
 
+    private SpriteShapeRenderer spriteShapeRenderer;
+    private float originalOpacity;
+
     protected virtual void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
@@ -44,6 +49,7 @@ public class Cell : MonoBehaviour
             rigidBody.mass = this.mass;
         }
         durability = maxDurability;
+        percentile = 1;
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         for (int i = 0; i < gluePoints.Length; i++) 
         {
@@ -51,13 +57,22 @@ public class Cell : MonoBehaviour
         }
         FindCore();
         cameraFollow = GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
+        spriteShapeRenderer = GetComponent<SpriteShapeRenderer>();
+        originalOpacity = spriteShapeRenderer.color.a;
     }
 
     protected virtual void Update() {
+        SetOpacity();
+    }
 
+    protected void SetOpacity() {
+        Color tempColor = spriteShapeRenderer.color;
+        tempColor.a = originalOpacity * percentile;
+        spriteShapeRenderer.color = tempColor;
     }
     
     protected bool isDead() { return durability < 0; }
+
 
 
     protected virtual void Die() {
@@ -65,14 +80,14 @@ public class Cell : MonoBehaviour
         // <TODO> : 적절한 애니메이션(이펙트) 실행
         if(cellType == "CoreCell") 
             ShowDieEffect();
-        Decompose();
+        StartCoroutine(Decompose());
     }
 
     public void ShowDieEffect() {
         Instantiate(dieEffect, transform.position, Quaternion.identity);
     }
 
-    protected virtual void Decompose() {
+    protected virtual IEnumerator Decompose() {
         if(cellType == "CoreCell") {
             SetGluePtsAttachable(false);
             foreach(Transform child in transform) {
@@ -155,11 +170,13 @@ public class Cell : MonoBehaviour
                     // Debug.Log($" child of {coreCell.name} -> {child.name} step 1 reached");
                     // [Step 2]
                     Rigidbody2D childRb = child.gameObject.AddComponent<Rigidbody2D>();
-                    childRb.gravityScale = 0;
-                    childRb.drag = 0.5f;
-                    // Debug.Log($" child of {coreCell.name} -> {child.name} step 2 reached");
-                    childRb.velocity = coreCell.rigidBody.velocity;
-                    childRb.angularDrag = 1;
+                    if(childRb != null) {
+                        childRb.gravityScale = 0;
+                        childRb.drag = 0.5f;
+                        // Debug.Log($" child of {coreCell.name} -> {child.name} step 2 reached");
+                        childRb.velocity = coreCell.rigidBody.velocity;
+                        childRb.angularDrag = 1;
+                    }
                     
                     Cell childCell = child.GetComponent<Cell>();
                     childCell.rigidBody = childRb;
@@ -190,6 +207,7 @@ public class Cell : MonoBehaviour
             tempCoreCell.SetGluePtsAttachable(true);
         }
         Destroy(gameObject);
+        yield return null;
     }
 
     // mass, (damage, coolTime, range, shotSpeed, haveGrow, haveMagic), (delta)
@@ -203,7 +221,7 @@ public class Cell : MonoBehaviour
     // Cell이 적대적인 총알에 맞았을 때 호출되는 함수
     public void CellHit(float damage) {
         durability -= damage;
-
+        percentile = durability / maxDurability;
         // 죽었는지 체크
         if (isDead()) {
             Die();
