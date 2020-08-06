@@ -1,5 +1,4 @@
-HEXAWAR
-=======
+##### HEXAWAR
 <del>핵싸워</del>
 
 ## 요약
@@ -12,8 +11,8 @@ Cell 종류
 ## Core Cell : 평범한 이동, 공격의 기능을 가진 셀
 #
 ## Structure Cell : GunCell, BoosterCell
-####GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
-####BoosterCell : AccelerationCell, RotationCell
+#### GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
+#### BoosterCell : AccelerationCell, RotationCell
 #
-##>Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
+## > Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
 # 
