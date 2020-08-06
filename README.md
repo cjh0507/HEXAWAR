@@ -9,7 +9,7 @@ QE를 통한 회전, WASD를 통한 이동.
 # Cell 종류
 ## Core Cell : 평범한 이동, 공격의 기능을 가진 셀
 ## Structure Cell : GunCell, BoosterCell
->GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
->BoosterCell : AccelerationCell, RotationCell
->Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
+####>GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
+####>BoosterCell : AccelerationCell, RotationCell
+##>Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
 # 
