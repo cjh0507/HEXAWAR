@@ -863,7 +863,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2826014100732287024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ee8d8695ccd6e45988710835ee4b99, type: 3}
+  m_Script: {fileID: 11500000, guid: c587cf5812b16fa4aae1fdbc2ddcf77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentCells:
@@ -874,33 +874,31 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gluePoints:
-  - {fileID: 4940556947385501376}
-  - {fileID: 4640457376079457965}
-  - {fileID: 3568795848652938840}
-  - {fileID: 1757862979559947362}
-  - {fileID: 4950765575391797154}
-  - {fileID: 7095872444962490097}
-  rigidBody: {fileID: 8071167878453285894}
-  coreCell: {fileID: 2243321877947087833}
-  cellType: CoreCell
-  attachEffect: {fileID: 1814553308253870096, guid: 20d62f73056765b4486f900a633574a4,
-    type: 3}
-  dieEffect: {fileID: 5996741028553721595, guid: 1ade9d9a412743e43bc2aeaf68e1e7a0,
-    type: 3}
-  maxDurability: 100
-  durability: 100
-  mass: 1
-  isAttached: 1
-  polygonCollider2D: {fileID: 7835348008143988269}
-  bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rigidBody: {fileID: 0}
+  coreCell: {fileID: 0}
+  cellType: 
+  attachEffect: {fileID: 0}
+  dieEffect: {fileID: 0}
+  maxDurability: 50
+  durability: 50
+  mass: 0.2
+  isAttached: 0
+  polygonCollider2D: {fileID: 0}
+  bullet: {fileID: 0}
   haveGrow: 0
   haveMagic: 0
   damage: 5
   coolTime: 0.5
   range: 6
   shotSpeed: 5
-  speed: 11
-  acceleration: 7.5
+  speed: 10
+  acceleration: 5
   rotSpeed: 1.5
   bulletSpread: 1
   childCellCount: 0

@@ -6297,7 +6297,7 @@ GameObject:
   - component: {fileID: 2273629809266983173}
   - component: {fileID: 8119677261293858522}
   m_Layer: 9
-  m_Name: DefaultMini 1
+  m_Name: SniperMini
   m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6525,7 +6525,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5239664344257383731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0ee8d8695ccd6e45988710835ee4b99, type: 3}
+  m_Script: {fileID: 11500000, guid: c587cf5812b16fa4aae1fdbc2ddcf77c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   adjacentCells:
@@ -6536,25 +6536,23 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   gluePoints:
-  - {fileID: 3107308309852001219}
-  - {fileID: 3452349183335857070}
-  - {fileID: 6776205247309253467}
-  - {fileID: 8640768584704043361}
-  - {fileID: 3115265127313345185}
-  - {fileID: 1006159016342164466}
-  rigidBody: {fileID: 2273629809266983173}
-  coreCell: {fileID: 8119677261293858522}
-  cellType: CoreCell
-  attachEffect: {fileID: 1814553308253870096, guid: 20d62f73056765b4486f900a633574a4,
-    type: 3}
-  dieEffect: {fileID: 5996741028553721595, guid: 1ade9d9a412743e43bc2aeaf68e1e7a0,
-    type: 3}
-  maxDurability: 100
-  durability: 100
-  mass: 1
-  isAttached: 1
-  polygonCollider2D: {fileID: 230736158246957870}
-  bullet: {fileID: 4948076321912158606, guid: 5e34cdd45c47dd142ae4b4e5afc21e59, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  rigidBody: {fileID: 0}
+  coreCell: {fileID: 0}
+  cellType: 
+  attachEffect: {fileID: 0}
+  dieEffect: {fileID: 0}
+  maxDurability: 50
+  durability: 50
+  mass: 0.2
+  isAttached: 0
+  polygonCollider2D: {fileID: 0}
+  bullet: {fileID: 0}
   haveGrow: 0
   haveMagic: 0
   damage: 5
