@@ -17,6 +17,11 @@ public class SpawnManager : MonoBehaviour
     float bossTime;
     float cellTime;
 
+    bool boss1Spawned = false;
+    bool boss2Spawned = false;
+    bool boss3Spawned = false;
+    bool boss4Spawned = false;
+
     private Transform playerTr; // 플레이어 위치 추적용
 
     void Start() {
@@ -32,6 +37,22 @@ public class SpawnManager : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if(!boss1Spawned && Input.GetKey(KeyCode.Alpha7)) {
+            boss1Spawned = true;
+            SpawnBoss(0);
+        }
+        if(!boss2Spawned && Input.GetKey(KeyCode.Alpha8)) {
+            boss2Spawned = true;
+            SpawnBoss(1);
+        }
+        if(!boss3Spawned && Input.GetKey(KeyCode.Alpha9)) {
+            boss3Spawned = true;
+            SpawnBoss(2);
+        }
+        if(!boss4Spawned && Input.GetKey(KeyCode.Alpha0)) {
+            boss4Spawned = true;
+            SpawnBoss(3);
+        }
         if (InGameUI.instance.time - minionTime > 10) {
             minionTime += 10;
             SpawnMinion();
@@ -86,6 +107,11 @@ public class SpawnManager : MonoBehaviour
         
         Vector2 randPos = (Vector2) playerTr.position + GetRandomPos(1.5f);
         Instantiate(bosses[randId], randPos, Quaternion.identity);
+    }
+
+    void SpawnBoss(int id) {
+        Vector2 randPos = (Vector2) playerTr.position + GetRandomPos(1.0f);
+        Instantiate(bosses[id], randPos, Quaternion.identity);
     }
 
     void SpawnCell() {

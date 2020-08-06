@@ -15,12 +15,13 @@ public class InGameUI : MonoBehaviour
     public float score;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {  
+        GameManager.instance.isPlayerAlive = true;
         score = 0;
         time = 0;
         player = GameObject.FindWithTag("PlayerCoreCell").GetComponent<CoreCell>();
-        if (InGameUI.instance == null)  // 게임시작했을때 이 instance가 없을때
+        if (InGameUI.instance == null)  // 게임시작 했을 때 이 instance가 없을때
             InGameUI.instance = this;  // instance를 생성
     }
 
