@@ -80,13 +80,15 @@ public class Cell : MonoBehaviour
         // <TODO> : 적절한 애니메이션(이펙트) 실행
         if(gameObject.layer == LayerMask.NameToLayer("Enemy")) {
             if(cellType == "CoreCell") {
-                GameObject.Find("GameManager").GetComponent<InGameUI>().ScoreUp(50);
+                InGameUI.instance.ScoreUp(50);
             }
-            else GameObject.Find("GameManager").GetComponent<InGameUI>().ScoreUp(10);
+            else InGameUI.instance.ScoreUp(10);
         }
         if(cellType == "CoreCell") {
             ExplosionSFXManager.instance.PlayExplosionSound();
             ShowDieEffect();
+            if(gameObject.layer == LayerMask.NameToLayer("Player"))
+                GameManager.instance.GameOver(InGameUI.instance.score, InGameUI.instance.time);
         }
         StartCoroutine(Decompose());
     }
