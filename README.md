@@ -14,5 +14,5 @@ Cell 종류
 #### GunCell : GunCell, ShotgunCell, SniperCell, SubmachinegunCell
 #### BoosterCell : AccelerationCell, RotationCell
 #
-## > Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
+##> Feature Cell : HardCell, OverclockCell, FastCell, LiteCell, RepairCell, GrowCell
 # 
