@@ -67,7 +67,7 @@ public class Cell : MonoBehaviour
 
     protected void SetOpacity() {
         Color tempColor = spriteShapeRenderer.color;
-        tempColor.a = originalOpacity * percentile;
+        tempColor.a = (originalOpacity - 0.5f) * percentile + 0.5f;
         spriteShapeRenderer.color = tempColor;
     }
     
@@ -78,8 +78,16 @@ public class Cell : MonoBehaviour
     protected virtual void Die() {
 
         // <TODO> : 적절한 애니메이션(이펙트) 실행
-        if(cellType == "CoreCell") 
+        if(gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+            if(cellType == "CoreCell") {
+                GameObject.Find("GameManager").GetComponent<InGameUI>().ScoreUp(50);
+            }
+            else GameObject.Find("GameManager").GetComponent<InGameUI>().ScoreUp(10);
+        }
+        if(cellType == "CoreCell") {
+            ExplosionSFXManager.instance.PlayExplosionSound();
             ShowDieEffect();
+        }
         StartCoroutine(Decompose());
     }
 
@@ -113,11 +121,12 @@ public class Cell : MonoBehaviour
 
                     // [Step 2]
                     Rigidbody2D childRb = child.gameObject.AddComponent<Rigidbody2D>();
-                    childRb.gravityScale = 0;
-                    childRb.drag = 0.5f;
-                    childRb.angularDrag = 1;
-                    childRb.velocity = rigidBody.velocity + new Vector2(Random.Range(-2f, 2f), Random.Range(-2f, 2f)); // TODO : 코어로부터 멀어지는 방향으로 고치기
-
+                    if(childRb != null) {
+                        childRb.gravityScale = 0;
+                        childRb.drag = 0.5f;
+                        childRb.angularDrag = 1;
+                        childRb.velocity = rigidBody.velocity + new Vector2(Random.Range(-2f, 2f), Random.Range(-2f, 2f)); // TODO : 코어로부터 멀어지는 방향으로 고치기
+                    }
                     Cell childCell = child.GetComponent<Cell>();
                     childCell.rigidBody = childRb;
                     
@@ -222,6 +231,7 @@ public class Cell : MonoBehaviour
     public void CellHit(float damage) {
         durability -= damage;
         percentile = durability / maxDurability;
+        SFXManager.instance.PlayHitSound();
         // 죽었는지 체크
         if (isDead()) {
             Die();

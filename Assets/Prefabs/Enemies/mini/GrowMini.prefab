@@ -6601,7 +6601,7 @@ GameObject:
   - component: {fileID: 2523165393741855276}
   - component: {fileID: 5487487429582460403}
   m_Layer: 9
-  m_Name: GrowCell
+  m_Name: GrowMini
   m_TagString: Cell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

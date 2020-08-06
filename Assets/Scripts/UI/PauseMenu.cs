@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject PauseUI;
 
+    public AudioSource BGMAudioSrc;
+
     private static bool paused = false;
 
 
@@ -26,12 +28,16 @@ public class PauseMenu : MonoBehaviour
         {
             PauseUI.SetActive(true);
             Time.timeScale = 0f;
+            if(BGMAudioSrc.isPlaying)
+                BGMAudioSrc.Pause();
         }
 
         if(!paused)
         {
             PauseUI.SetActive(false);
             Time.timeScale = 1f;
+            if(!BGMAudioSrc.isPlaying)
+                BGMAudioSrc.Play();
         }
         
     }

@@ -50,6 +50,8 @@ public class GunCell : Cell
         // Vector2 dir = (Camera.main.ScreenToWorldPoint(Input.mousePosition)) - transform.position;
         dir = SetBulletSpread(dir);
         MakeBullet(dir);
+        if(gameObject.layer == LayerMask.NameToLayer("Player"))
+            FireSFXManager.instance.PlayFireSound();
         StartCoroutine(WaitForCoolTime());
     }
 
