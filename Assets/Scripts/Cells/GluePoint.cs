@@ -87,6 +87,8 @@ public class GluePoint : MonoBehaviour
                 }
                 // coreCell.GetComponent<CoreCell>().childCellCount++;
                 // Debug.Log($"{oCell.name} index {oCellGPId} Attached to {aCell.name} index {id}"); // 나중에 지워야 됨
+                if(gameObject.layer == LayerMask.NameToLayer("Player"))
+                    SFXManager.instance.PlayAttachSound();
             }
         }
         yield return null;

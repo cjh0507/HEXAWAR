@@ -105,6 +105,8 @@ public class CoreCell : Cell
         dir = SetBulletSpread(dir);
         
         MakeBullet(dir);
+        if(gameObject.layer == LayerMask.NameToLayer("Player"))
+            FireSFXManager.instance.PlayFireSound();
         StartCoroutine(WaitForCoolTime());
     }
 
@@ -160,9 +162,10 @@ public class CoreCell : Cell
     }
 
     protected override void ResetStatus() {
-        base.ResetStatus();
         mass = 1;
         maxDurability = 100;
+        if (durability > maxDurability)
+            durability = maxDurability;
         // [공격 관련 스탯]
         haveGrow = 0;
         haveMagic = 0;

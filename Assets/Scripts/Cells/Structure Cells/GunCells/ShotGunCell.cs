@@ -50,6 +50,8 @@ public class ShotGunCell : GunCell
         for(int i = 0; i < rots.Length; i++) {
             MakeBullet(rots[i]* dir);
         }
+        if(gameObject.layer == LayerMask.NameToLayer("Player"))
+            FireSFXManager.instance.PlayFireSound();
         // 쿨타임 시작
         StartCoroutine(WaitForCoolTime());
     }
