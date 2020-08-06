@@ -2,6 +2,7 @@
 <del>핵싸워</del>
 * Project HEXAWAR
 * Contributors : 이현호 최진혁 조민규
+* 7/29 ~ 8/7
 
 ## 요약
 -----------
