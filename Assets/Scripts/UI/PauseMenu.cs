@@ -14,6 +14,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        paused = false;
         PauseUI.SetActive(false);    
     }
 
@@ -25,15 +26,22 @@ public class PauseMenu : MonoBehaviour
         }
         if(paused)
         {
-            PauseUI.SetActive(true);
+            if(!PauseUI.activeInHierarchy) {
+                PauseUI.SetActive(true);
+                PauseSFXManager.instance.PlayPauseSound();
+            }
+            
             Time.timeScale = 0f;
             if(BGMAudioSrc.isPlaying)
                 BGMAudioSrc.Pause();
-        }
-
-        if(!paused)
-        {
-            PauseUI.SetActive(false);
+        } 
+        else
+        {   
+            if(PauseUI.activeInHierarchy) {
+                PauseSFXManager.instance.PlayPauseSound();
+                PauseUI.SetActive(false);
+            }
+            
             Time.timeScale = 1f;
             if(!BGMAudioSrc.isPlaying)
                 BGMAudioSrc.Play();

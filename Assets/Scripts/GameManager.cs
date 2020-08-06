@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     {
         if (GameManager.instance == null)  // 게임시작했을때 이 instance가 없을때
             GameManager.instance = this;  // instance를 생성
+        else if (GameManager.instance != this) {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(gameObject);
     }
 
